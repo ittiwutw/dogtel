@@ -1,0 +1,7 @@
+{
+  "name": "dogtelApp",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}
