@@ -4,6 +4,55 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-<ion-button expand="block" color="danger" (click)="logout()">ออกจากระบบ</ion-button>
+<ion-content *ngIf="userData">
+  <div class="card">
+    <div class="header">
+      <div class="avatar">
+        <img src="../../assets/icon/icon.png" alt="" />
+      </div>
+    </div>
+  </div>
+  <div class="card-body">
+    <div class="user-meta ion-text-center">
+      <ion-list>
+        <ion-item>
+          <ion-label>บทบาท</ion-label>
+          <ion-select [(ngModel)]="userRole" (ionChange)="changeRole()">
+            <ion-select-option
+              *ngFor="let role of userData"
+              [value]="role.userTypeId"
+              >{{role.userTypeName}}</ion-select-option
+            >
+          </ion-select>
+        </ion-item>
+      </ion-list>
+      <ion-list>
+        <div *ngFor="let role of userData">
+          <ion-item *ngIf="role.userTypeId != 1">
+            <ion-label>การยืนยันตัวตน {{role.userTypeName}}</ion-label>
+            <p *ngIf="role.approveFlg == 0 " style="color: #f04141">
+              ยังไม่ได้ยืนยันตัวตน
+            </p>
+            <p *ngIf="role.approveFlg == 2" style="color: #a2a4ab">
+              รอการอนุมัติ
+            </p>
+            <p *ngIf="role.approveFlg == 1" style="color: #0ec254">
+              ยืนยันตัวตนแล้ว
+            </p>
+          </ion-item>
+        </div>
+      </ion-list>
+      <br />
+      <!-- <ion-button expand="block" color="warning" *ngIf="isApproveRoleReq"
+        >กรุณายืนยันตัวตน</ion-button
+      > -->
+      <br />
+      <ion-button expand="block" color="danger" (click)="logout()"
+        >Logout</ion-button
+      >
+    </div>
+    <!-- <ion-button expand="full" color="primary">http://rogerfederer.com</ion-button>
+        <ion-button expand="full" color="secondary">@RogerFederer on Twitter</ion-button>
+        <ion-button expand="full" color="secondary">View profile at ATP</ion-button> -->
+  </div>
 </ion-content>

@@ -32,14 +32,16 @@ export class RegisterPage implements OnInit {
       };
 
       this.restApi.register(param).then(data => {
-        // if (data) {
+        let res: any;
+        res = data;
+        if (res.response_code === '0001') {
 
-        alert('สมัครสมาชิกสำเร็จ');
-        this.router.navigate(['/login']);
+          alert(res.response_description);
 
-        // } else {
-        //   console.log('wrong');
-        // }
+        } else {
+          alert('สมัครสมาชิกสำเร็จ');
+          this.router.navigate(['/login']);
+        }
       });
     }
   }

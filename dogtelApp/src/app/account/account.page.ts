@@ -10,6 +10,10 @@ import { Storage } from '@ionic/storage';
 })
 export class AccountPage implements OnInit {
 
+  userData = [];
+  userRole: any;
+  isApproveRoleReq = false;
+
   constructor(
     private restApi: RestService,
     private router: Router,
@@ -17,6 +21,39 @@ export class AccountPage implements OnInit {
   ) { }
 
   ngOnInit() {
+  }
+
+  ionViewWillEnter() {
+    // this.storage.remove('role');
+    this.storage.get('user').then((val) => {
+      if (val) {
+        console.log('user data', val);
+        this.userData = val;
+        this.storage.get('role').then((currentRole) => {
+          if (currentRole) {
+            this.userRole = currentRole;
+          } else {
+            this.userRole = 1;
+            this.changeRole();
+          }
+        });
+      }
+    });
+  }
+
+  changeRole() {
+    // if (this.userRole.approveFlg === '1') {
+      this.storage.remove('role').then(res => {
+        this.storage.set('role', this.userRole);
+        console.log('current role : ' + this.userRole.userTypeId);
+        // this.isApproveRoleReq = false;
+      });
+    // } else {
+    //   // this.userRole = 1;
+    //   this.isApproveRoleReq = true;
+    //   console.log(this.userRole.approveFlg);
+    // }
+
   }
 
   logout() {
