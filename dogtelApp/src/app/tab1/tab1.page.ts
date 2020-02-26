@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { RestService } from '../services/rest.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-tab1',
@@ -18,6 +20,36 @@ export class Tab1Page {
     speed: 400,
     autoplay: true
   };
-  constructor() {}
+
+  hotels: any;
+
+  constructor(
+    private restApi: RestService,
+    private router: Router
+  ) {
+    this.getHotelList();
+  }
+
+  getHotelList() {
+    this.restApi.getHotelList().then(res => {
+      console.log(res);
+      let data: any;
+      data = res;
+
+      const getResults = data.data;
+      if (getResults) {
+        console.log(getResults.result);
+        this.hotels = getResults.result;
+        // const userInfo = userData.result[0];
+
+      } else {
+        // alert(data.response_description);
+      }
+    });
+  }
+
+  onClickHotel(hotel) {
+    this.router.navigate(['/hotel-detail', { hotel: JSON.stringify(hotel) }]);
+  }
 
 }

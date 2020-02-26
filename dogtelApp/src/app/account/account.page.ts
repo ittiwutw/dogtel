@@ -13,6 +13,7 @@ export class AccountPage implements OnInit {
   userData = [];
   userRole: any;
   isApproveRoleReq = false;
+  profile: any;
 
   constructor(
     private restApi: RestService,
@@ -29,6 +30,7 @@ export class AccountPage implements OnInit {
       if (val) {
         console.log('user data', val);
         this.userData = val;
+        this.profile = val[0];
         this.storage.get('role').then((currentRole) => {
           if (currentRole) {
             this.userRole = currentRole;
@@ -43,11 +45,11 @@ export class AccountPage implements OnInit {
 
   changeRole() {
     // if (this.userRole.approveFlg === '1') {
-      this.storage.remove('role').then(res => {
-        this.storage.set('role', this.userRole);
-        console.log('current role : ' + this.userRole.userTypeId);
-        // this.isApproveRoleReq = false;
-      });
+    this.storage.remove('role').then(res => {
+      this.storage.set('role', this.userRole);
+      console.log('current role : ' + this.userRole.userTypeId);
+      // this.isApproveRoleReq = false;
+    });
     // } else {
     //   // this.userRole = 1;
     //   this.isApproveRoleReq = true;

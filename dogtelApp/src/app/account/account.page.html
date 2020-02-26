@@ -1,19 +1,59 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>บัญชี</ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content *ngIf="userData">
-  <div class="card">
+<ion-content *ngIf="userData" style="background-color: bisque;">
+  <div class="card" padding style="background-color: #fff4cb;" *ngIf="profile">
     <div class="header">
+      <div class="ion-text-right">
+        <ion-button>ผู้ให้บริการ</ion-button>
+      </div>
       <div class="avatar">
-        <img src="../../assets/icon/icon.png" alt="" />
+        <ion-row>
+          <ion-col size="4" class="ion-text-center">
+            <img src="../../assets/icon/favicon.png" alt="" />
+          </ion-col>
+          <ion-col size="8">
+            <p>Username : {{profile.username}}</p>
+          </ion-col>
+        </ion-row>
       </div>
     </div>
   </div>
   <div class="card-body">
     <div class="user-meta ion-text-center">
+      <ion-list>
+        <ion-list-header>
+          บัญชีของฉัน
+        </ion-list-header>
+        <ion-item detail>
+          <ion-label>ข้อมูลส่วนตัว</ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label>ข้อมูลสุนัข</ion-label>
+        </ion-item>
+        <div class="ion-text-left ion-padding">
+          <img src="../../assets/icon/favicon.png" alt="" class="ion-padding" />
+          <img src="../../assets/icon/favicon.png" alt="" class="ion-padding" />
+        </div>
+      </ion-list>
+
+      <ion-list>
+        <ion-item detail>
+          <ion-label>ตั้งค่าบัญชีผู้ใช้</ion-label>
+        </ion-item>
+        <ion-item detail>
+          <ion-label>ศูนย์ช่วยเหลือ</ion-label>
+        </ion-item>
+        <ion-item detail>
+          <ion-label>ติดต่อฝ่ายบริการช่วยเหลือ</ion-label>
+        </ion-item>
+        <ion-item detail>
+          <ion-label>ภาษา</ion-label>
+        </ion-item>
+      </ion-list>
+      <br />
+      <ion-button expand="block" color="danger" (click)="logout()"
+        >ออกจากระบบ</ion-button
+      >
+      <br>
+      <br>
       <ion-list>
         <ion-item>
           <ion-label>บทบาท</ion-label>
@@ -25,8 +65,6 @@
             >
           </ion-select>
         </ion-item>
-      </ion-list>
-      <ion-list>
         <div *ngFor="let role of userData">
           <ion-item *ngIf="role.userTypeId != 1">
             <ion-label>การยืนยันตัวตน {{role.userTypeName}}</ion-label>
@@ -46,10 +84,7 @@
       <!-- <ion-button expand="block" color="warning" *ngIf="isApproveRoleReq"
         >กรุณายืนยันตัวตน</ion-button
       > -->
-      <br />
-      <ion-button expand="block" color="danger" (click)="logout()"
-        >Logout</ion-button
-      >
+      
     </div>
     <!-- <ion-button expand="full" color="primary">http://rogerfederer.com</ion-button>
         <ion-button expand="full" color="secondary">@RogerFederer on Twitter</ion-button>

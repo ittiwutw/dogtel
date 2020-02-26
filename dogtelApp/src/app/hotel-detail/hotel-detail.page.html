@@ -1,0 +1,21 @@
+<ion-content *ngIf="hotel">
+  <div padding>
+    <ion-card class="ion-text-center">
+      <img [src]="hotel.imgUrl" alt="" />
+    </ion-card>
+    <ion-row>
+      <ion-col size="8" class="ion-text-left">
+        <span style="font-size: 2rem; padding-left: 5px;">{{hotel.name}}</span>
+      </ion-col>
+      <ion-col size="4" class="ion-text-right">
+        <ion-icon name="heart" style="font-size: 3rem;"></ion-icon>
+      </ion-col>
+      <ion-col size="2" class="ion-text-left">
+        <span style="padding-left: 5px;">สถานที่</span>
+      </ion-col>
+      <ion-col size="10" class="ion-text-left">
+        <span style="padding-left: 5px;">{{hotel.houseNo}} {{hotel.subDistrict}} {{hotel.district}} {{hotel.province}}</span>
+      </ion-col>
+    </ion-row>
+  </div>
+</ion-content>

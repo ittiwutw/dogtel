@@ -46,4 +46,19 @@ export class RestService {
 
   }
 
+  getHotelList() {
+    return new Promise((resolve, reject) => {
+
+      this.http.get(this.apiUrl + 'getHotelList')
+        .subscribe(res => {
+
+          // this.setUserLogin(res);
+          resolve(res);
+        }, (err) => {
+          reject(err);
+        });
+    });
+
+  }
+
 }
