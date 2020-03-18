@@ -26,6 +26,14 @@ const routes: Routes = [
   {
     path: 'hotel-detail',
     loadChildren: () => import('./hotel-detail/hotel-detail.module').then( m => m.HotelDetailPageModule)
+  },
+  {
+    path: 'search-hotel',
+    loadChildren: () => import('./search-hotel/search-hotel.module').then( m => m.SearchHotelPageModule)
+  },
+  {
+    path: 'search-result',
+    loadChildren: () => import('./search-result/search-result.module').then( m => m.SearchResultPageModule)
   }
 ];
 @NgModule({

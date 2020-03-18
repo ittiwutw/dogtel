@@ -1,3 +1,14 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button
+        color="dark"
+        defaultHref="/search-hotel"
+      ></ion-back-button>
+    </ion-buttons>
+    <ion-title> </ion-title>
+  </ion-toolbar>
+</ion-header>
 <ion-content *ngIf="hotel">
   <div padding>
     <ion-card class="ion-text-center">
@@ -14,8 +25,70 @@
         <span style="padding-left: 5px;">สถานที่</span>
       </ion-col>
       <ion-col size="10" class="ion-text-left">
-        <span style="padding-left: 5px;">{{hotel.houseNo}} {{hotel.subDistrict}} {{hotel.district}} {{hotel.province}}</span>
+        <span style="padding-left: 5px;"
+          >{{hotel.houseNo}} {{hotel.subDistrict}} {{hotel.district}}
+          {{hotel.province}}</span
+        >
       </ion-col>
     </ion-row>
   </div>
+  <div #map id="map"></div>
+  <br />
+  <ion-card>
+    <ion-row class="ion-text-center">
+      <ion-col size="4" class="ion-text-center">
+        <ion-item>
+          <ion-label>วันที่นำฝาก</ion-label>
+        </ion-item>
+
+        <ion-datetime
+          [(ngModel)]="bokkingDetail.startDate"
+          value="2019-10-01T15:43:40.394Z"
+          display-timezone="utc"
+        ></ion-datetime>
+      </ion-col>
+      <ion-col size="2" class="ion-text-center">
+        <ion-icon
+          name="arrow-forward"
+          style="margin-top: 30%;
+        font-size: 3rem;"
+        ></ion-icon>
+      </ion-col>
+      <ion-col size="4" class="ion-text-center">
+        <ion-item class="ion-text-center">
+          <ion-label>วันที่รับกลับ</ion-label>
+        </ion-item>
+        <ion-datetime
+          [(ngModel)]="bokkingDetail.endDate"
+          value="2019-10-01T15:43:40.394Z"
+          display-timezone="utc"
+        ></ion-datetime>
+      </ion-col>
+    </ion-row>
+  </ion-card>
+  <ion-card>
+    <ion-item>
+      <ion-label>ราคา</ion-label>
+      <ion-select placeholder="เลือกห้องที่ต้องการ">
+        <ion-select-option value="f">1000</ion-select-option>
+      </ion-select>
+    </ion-item>
+  </ion-card>
+  <ion-list>
+    <ion-list-header>
+      <strong>บริการ</strong>
+    </ion-list-header>
+    <ion-list-header>
+      <strong>Exclusive</strong>
+    </ion-list-header>
+    <ion-item>
+      Swimming Pool
+    </ion-item>
+    <ion-item>
+      Treadmill
+    </ion-item>
+  </ion-list>
 </ion-content>
+<ion-footer>
+  <ion-button expand="block">จอง</ion-button>
+</ion-footer>

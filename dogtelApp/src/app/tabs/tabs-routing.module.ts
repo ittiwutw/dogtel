@@ -14,6 +14,21 @@ const routes: Routes = [
             path: '',
             loadChildren: () =>
               import('../tab1/tab1.module').then(m => m.Tab1PageModule)
+          },
+          {
+            path: 'search-hotel',
+            loadChildren: () =>
+              import('../search-hotel/search-hotel.module').then(m => m.SearchHotelPageModule)
+          },
+          {
+            path: 'search-result',
+            loadChildren: () =>
+              import('../search-result/search-result.module').then(m => m.SearchResultPageModule)
+          },
+          {
+            path: 'hotel-detail',
+            loadChildren: () =>
+              import('../hotel-detail/hotel-detail.module').then(m => m.HotelDetailPageModule)
           }
         ]
       },

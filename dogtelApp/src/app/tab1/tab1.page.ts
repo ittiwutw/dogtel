@@ -49,7 +49,11 @@ export class Tab1Page {
   }
 
   onClickHotel(hotel) {
-    this.router.navigate(['/hotel-detail', { hotel: JSON.stringify(hotel) }]);
+    this.router.navigate(['tabs/tab1/hotel-detail', { hotel: JSON.stringify(hotel) }]);
+  }
+
+  onClickSearch() {
+    this.router.navigate(['tabs/tab1/search-hotel']);
   }
 
 }
