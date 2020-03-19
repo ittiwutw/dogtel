@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 })
 export class SearchResultPage implements OnInit {
   results: any;
+  bookingDetail: any;
   constructor(
     private restApi: RestService,
     public activatedRoute: ActivatedRoute,
@@ -17,6 +18,7 @@ export class SearchResultPage implements OnInit {
   ) {
     this.activatedRoute.params.subscribe(params => {
       const searchCondition = JSON.parse(params.searchCondition);
+      this.bookingDetail = searchCondition;
       this.getResultlList(searchCondition);
     });
   }
@@ -43,7 +45,7 @@ export class SearchResultPage implements OnInit {
   }
 
   onClickHotel(hotel) {
-    this.router.navigate(['tabs/tab1/hotel-detail', { hotel: JSON.stringify(hotel) }]);
+    this.router.navigate(['tabs/tab1/hotel-detail', { hotel: JSON.stringify(hotel), bookingDetail: JSON.stringify(this.bookingDetail) }]);
   }
 
 }

@@ -10,10 +10,15 @@ import { Router } from '@angular/router';
 export class SearchHotelPage implements OnInit {
 
   searchCondition = {
+    hotelId: 0,
+    userId: 0,
     startDate: '',
     endDate: '',
-    dogId: '',
-    type: 'hotel'
+    dogId: 0,
+    type: 'hotel',
+    startTime: '',
+    endTime: '',
+    status: 'WAITING'
   };
 
   constructor(

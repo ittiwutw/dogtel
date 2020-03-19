@@ -42,9 +42,17 @@
         </ion-item>
 
         <ion-datetime
-          [(ngModel)]="bokkingDetail.startDate"
+          [(ngModel)]="bookingDetail.startDate"
           value="2019-10-01T15:43:40.394Z"
           display-timezone="utc"
+        ></ion-datetime>
+        <ion-item>
+          <ion-label>เวลานำฝาก</ion-label>
+        </ion-item>
+
+        <ion-datetime
+          [(ngModel)]="bookingDetail.startTime"
+          displayFormat="HH:mm"
         ></ion-datetime>
       </ion-col>
       <ion-col size="2" class="ion-text-center">
@@ -59,13 +67,31 @@
           <ion-label>วันที่รับกลับ</ion-label>
         </ion-item>
         <ion-datetime
-          [(ngModel)]="bokkingDetail.endDate"
+          [(ngModel)]="bookingDetail.endDate"
           value="2019-10-01T15:43:40.394Z"
           display-timezone="utc"
+        ></ion-datetime>
+        <ion-item>
+          <ion-label>เวลารับกลับ</ion-label>
+        </ion-item>
+
+        <ion-datetime
+          [(ngModel)]="bookingDetail.endTime"
+          displayFormat="HH:mm"
         ></ion-datetime>
       </ion-col>
     </ion-row>
   </ion-card>
+  <div>
+    <ion-card>
+      <ion-item>
+        <ion-label>เลือกสุนัขที่ต้องการ</ion-label>
+        <ion-select placeholder="เลือก" [(ngModel)]="bookingDetail.dogId">
+          <ion-select-option value="1">เต้าหู้</ion-select-option>
+        </ion-select>
+      </ion-item>
+    </ion-card>
+  </div>
   <ion-card>
     <ion-item>
       <ion-label>ราคา</ion-label>
@@ -90,5 +116,5 @@
   </ion-list>
 </ion-content>
 <ion-footer>
-  <ion-button expand="block">จอง</ion-button>
+  <ion-button expand="block" (click)="onClickBook()">จอง</ion-button>
 </ion-footer>

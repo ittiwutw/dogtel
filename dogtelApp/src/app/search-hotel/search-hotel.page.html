@@ -25,6 +25,13 @@
             value="2019-10-01T15:43:40.394Z"
             display-timezone="utc"
           ></ion-datetime>
+        <ion-item>
+          <ion-label>เวลานำฝาก</ion-label>
+        </ion-item>
+        <ion-datetime
+          [(ngModel)]="searchCondition.startTime"
+          displayFormat="HH:mm"
+        ></ion-datetime>
         </ion-col>
         <ion-col size="2" class="ion-text-center">
           <ion-icon
@@ -42,6 +49,14 @@
             value="2019-10-01T15:43:40.394Z"
             display-timezone="utc"
           ></ion-datetime>
+          <ion-item>
+            <ion-label>เวลารับกลับ</ion-label>
+          </ion-item>
+  
+          <ion-datetime
+            [(ngModel)]="searchCondition.endTime"
+            displayFormat="HH:mm"
+          ></ion-datetime>
         </ion-col>
       </ion-row>
     </ion-card>
@@ -51,7 +66,7 @@
       <ion-item>
         <ion-label>เลือกสุนัขที่ต้องการ</ion-label>
         <ion-select placeholder="เลือก" [(ngModel)]="searchCondition.dogId">
-          <ion-select-option value="f">เต้าหู้</ion-select-option>
+          <ion-select-option value="1">เต้าหู้</ion-select-option>
         </ion-select>
       </ion-item>
     </ion-card>
