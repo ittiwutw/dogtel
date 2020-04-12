@@ -1,62 +1,382 @@
 <ion-content>
-  <div padding>
-    <h1 class="ion-text-center">สถานะการจอง</h1>
-    <ion-grid>
-      <ion-row>
-        <ion-col size="4">
-          <ion-button expand="block">การจอง</ion-button>
-        </ion-col>
-        <ion-col size="4">
-          <ion-button expand="block">สำเร็จ</ion-button>
-        </ion-col>
-        <ion-col size="4">
-          <ion-button expand="block">ยกเลิก</ion-button>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-  </div>
-  <div padding>
-    <ion-card>
+  <h1 class="ion-text-center">สถานะการจอง</h1>
+  <!-- Label only -->
+  <ion-segment (ionChange)="segmentChanged($event)" value="booking" *ngIf="role == 'CUSTOMER' ">
+    <ion-segment-button value="booking">
+      <ion-label>การจอง</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="finished">
+      <ion-label>สำเร็จ</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="cancel">
+      <ion-label>ยกเลิก</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+
+  <ion-segment (ionChange)="segmentChanged($event)" value="hotelBooking" *ngIf="role == 'HOTEL' ">
+    <ion-segment-button value="hotelBooking">
+      <ion-label>การจอง</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="hotelProcessing">
+      <ion-label>กำลังดำเนินการ</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="hotelFinish">
+      <ion-label>สำเร็จ</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="hotelCancel">
+      <ion-label>ยกเลิก</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+
+  <div padding *ngIf="currentSeg == 'booking'">
+    <ion-card *ngFor="let booking of bookingList">
       <ion-row>
         <ion-col size="12">
           <ion-item>
             <ion-thumbnail slot="start">
               <img
-                src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y"
+                [src]="booking.imgUrl"
               />
             </ion-thumbnail>
-            <ion-label>Ployben Dog's</ion-label>
+            <ion-label>{{booking.name}}</ion-label>
           </ion-item>
         </ion-col>
         <ion-col size="12">
           <ion-row>
-            <ion-col size="5" class="ion-text-right"> 
-              <p>วันนำฝาก <br>01/10/2562</p>
-              
+            <ion-col size="5" class="ion-text-right">
+              <p>วันนำฝาก <br />{{booking.startDate | date: 'dd/MM/yyyy'}}</p>
             </ion-col>
-            <ion-col size="2" class="ion-text-center"> 
-              <ion-icon style="margin-top: 20px;" name="arrow-round-forward"></ion-icon>
+            <ion-col size="2" class="ion-text-center">
+              <ion-icon
+                style="margin-top: 20px;"
+                name="arrow-round-forward"
+              ></ion-icon>
             </ion-col>
-            <ion-col size="5" class="ion-text-left"> 
-              <p>วันนำฝาก <br>01/10/2562</p>
+            <ion-col size="5" class="ion-text-left">
+              <p>วันรับกลับ <br />{{booking.endDate | date: 'dd/MM/yyyy'}}</p>
             </ion-col>
           </ion-row>
         </ion-col>
         <ion-col size="12">
           <ion-row>
-            <ion-col size="6" class="ion-text-left"> 
+            <ion-col size="6" class="ion-text-left">
               <p>สถานะการจอง</p>
             </ion-col>
-            <ion-col size="6" class="ion-text-right"> 
-              <p>รอการยืนยัน</p>
+            <ion-col size="6" class="ion-text-right">
+              <p>{{booking.status}}</p>
+            </ion-col>
+          </ion-row>
+        </ion-col>
+        <ion-col size="12" *ngIf="booking.status != 'รอการยืนยัน'">
+          <ion-row>
+            <ion-col size="6" class="ion-text-left">
+              <p>การชำระเงิน</p>
+            </ion-col>
+            <ion-col size="6" class="ion-text-right">
+              <p>{{booking.paymentStatus}}</p>
+            </ion-col>
+          </ion-row>
+        </ion-col>
+        <ion-col size="12" *ngIf="booking.status != 'รอการยืนยัน'">
+          <ion-button expand="block" color="success" (click)="payBooking(booking.bookingId)" [disabled]="booking.paymentStatus == 'ชำระเงินแล้ว'">ชำระเงิน</ion-button>
+        </ion-col>
+        <ion-col size="12">
+          <ion-button expand="block" color="danger" (click)="cancelBooking(booking.bookingId)">ยกเลิกการจอง</ion-button>
+        </ion-col>
+        <ion-col size="12">
+          <ion-button expand="block">ติดต่อผู้ให้บริการ</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-card>
+  </div>
+
+  <div padding *ngIf="currentSeg == 'finished'">
+    <ion-card *ngFor="let booking of finishList">
+      <ion-row>
+        <ion-col size="12">
+          <ion-item>
+            <ion-thumbnail slot="start">
+              <img
+                [src]="booking.imgUrl"
+              />
+            </ion-thumbnail>
+            <ion-label>{{booking.name}}</ion-label>
+          </ion-item>
+        </ion-col>
+        <ion-col size="12">
+          <ion-row>
+            <ion-col size="5" class="ion-text-right">
+              <p>วันนำฝาก <br />{{booking.startDate | date: 'dd/MM/yyyy'}}</p>
+            </ion-col>
+            <ion-col size="2" class="ion-text-center">
+              <ion-icon
+                style="margin-top: 20px;"
+                name="arrow-round-forward"
+              ></ion-icon>
+            </ion-col>
+            <ion-col size="5" class="ion-text-left">
+              <p>วันรับกลับ <br />{{booking.endDate | date: 'dd/MM/yyyy'}}</p>
             </ion-col>
           </ion-row>
         </ion-col>
         <ion-col size="12">
-          <ion-button expand="block">ยกเลิกการจอง</ion-button>
+          <ion-row>
+            <ion-col size="6" class="ion-text-left">
+              <p>สถานะการจอง</p>
+            </ion-col>
+            <ion-col size="6" class="ion-text-right">
+              <p style="color: green;">{{booking.status}}</p>
+            </ion-col>
+          </ion-row>
         </ion-col>
         <ion-col size="12">
           <ion-button expand="block">ติดต่อผู้ให้บริการ</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-card>
+  </div>
+
+  <div padding *ngIf="currentSeg == 'cancel'">
+    <ion-card *ngFor="let booking of cancelList">
+      <ion-row>
+        <ion-col size="12">
+          <ion-item>
+            <ion-thumbnail slot="start">
+              <img
+                [src]="booking.imgUrl"
+              />
+            </ion-thumbnail>
+            <ion-label>{{booking.name}}</ion-label>
+          </ion-item>
+        </ion-col>
+        <ion-col size="12">
+          <ion-row>
+            <ion-col size="5" class="ion-text-right">
+              <p>วันนำฝาก <br />{{booking.startDate | date: 'dd/MM/yyyy'}}</p>
+            </ion-col>
+            <ion-col size="2" class="ion-text-center">
+              <ion-icon
+                style="margin-top: 20px;"
+                name="arrow-round-forward"
+              ></ion-icon>
+            </ion-col>
+            <ion-col size="5" class="ion-text-left">
+              <p>วันรับกลับ <br />{{booking.endDate | date: 'dd/MM/yyyy'}}</p>
+            </ion-col>
+          </ion-row>
+        </ion-col>
+        <ion-col size="12">
+          <ion-row>
+            <ion-col size="6" class="ion-text-left">
+              <p>สถานะการจอง</p>
+            </ion-col>
+            <ion-col size="6" class="ion-text-right">
+              <p style="color: red;">{{booking.status}}</p>
+            </ion-col>
+          </ion-row>
+        </ion-col>
+        <ion-col size="12">
+          <ion-button expand="block">ติดต่อผู้ให้บริการ</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-card>
+  </div>
+
+  <div padding *ngIf="currentSeg == 'hotelBooking'">
+    <ion-card *ngFor="let booking of hotelBookingList">
+      <ion-row>
+        <ion-col size="12">
+          <ion-item>
+            <ion-thumbnail slot="start">
+              <img
+                [src]="booking.imgUrl"
+              />
+            </ion-thumbnail>
+            <ion-label>{{booking.name}}</ion-label>
+          </ion-item>
+        </ion-col>
+        <ion-col size="12">
+          <ion-row>
+            <ion-col size="5" class="ion-text-right">
+              <p>วันนำฝาก <br />{{booking.startDate | date: 'dd/MM/yyyy'}}</p>
+            </ion-col>
+            <ion-col size="2" class="ion-text-center">
+              <ion-icon
+                style="margin-top: 20px;"
+                name="arrow-round-forward"
+              ></ion-icon>
+            </ion-col>
+            <ion-col size="5" class="ion-text-left">
+              <p>วันรับกลับ <br />{{booking.endDate | date: 'dd/MM/yyyy'}}</p>
+            </ion-col>
+          </ion-row>
+        </ion-col>
+        <ion-col size="12">
+          <ion-row>
+            <ion-col size="6" class="ion-text-left">
+              <p>สถานะการจอง</p>
+            </ion-col>
+            <ion-col size="6" class="ion-text-right">
+              <p>{{booking.status}}</p>
+            </ion-col>
+          </ion-row>
+        </ion-col>
+        <ion-col size="6">
+          <ion-button expand="block" color="danger" (click)="hotelCancel(booking.bookingId)">ยกเลิก</ion-button>
+        </ion-col>
+        <ion-col size="6" >
+          <ion-button expand="block" color="success" (click)="hotelConfirm(booking.bookingId)" >ยอมรับ</ion-button>
+        </ion-col>
+        <ion-col size="12">
+          <ion-button expand="block">ติดต่อผู้จอง</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-card>
+  </div>
+
+  <div padding *ngIf="currentSeg == 'hotelProcessing'">
+    <ion-card *ngFor="let booking of hotelProcessingList">
+      <ion-row>
+        <ion-col size="12">
+          <ion-item>
+            <ion-thumbnail slot="start">
+              <img
+                [src]="booking.imgUrl"
+              />
+            </ion-thumbnail>
+            <ion-label>{{booking.name}}</ion-label>
+          </ion-item>
+        </ion-col>
+        <ion-col size="12">
+          <ion-row>
+            <ion-col size="5" class="ion-text-right">
+              <p>วันนำฝาก <br />{{booking.startDate | date: 'dd/MM/yyyy'}}</p>
+            </ion-col>
+            <ion-col size="2" class="ion-text-center">
+              <ion-icon
+                style="margin-top: 20px;"
+                name="arrow-round-forward"
+              ></ion-icon>
+            </ion-col>
+            <ion-col size="5" class="ion-text-left">
+              <p>วันรับกลับ <br />{{booking.endDate | date: 'dd/MM/yyyy'}}</p>
+            </ion-col>
+          </ion-row>
+        </ion-col>
+        <ion-col size="12">
+          <ion-row>
+            <ion-col size="6" class="ion-text-left">
+              <p>สถานะการจอง</p>
+            </ion-col>
+            <ion-col size="6" class="ion-text-right">
+              <p>{{booking.status}}</p>
+            </ion-col>
+          </ion-row>
+        </ion-col>
+        <ion-col size="12">
+          <ion-row>
+            <ion-col size="6" class="ion-text-left">
+              <p>สถานะการชำระเงิน</p>
+            </ion-col>
+            <ion-col size="6" class="ion-text-right">
+              <p>{{booking.paymentStatus}}</p>
+            </ion-col>
+          </ion-row>
+        </ion-col>
+        <ion-col size="6">
+          <ion-button expand="block" color="danger" (click)="hotelCancel(booking.bookingId)">ยกเลิก</ion-button>
+        </ion-col>
+        <ion-col size="6" >
+          <ion-button expand="block" color="success" (click)="hotelFinish(booking.bookingId)" >ลูกค้ารับกลับแล้ว</ion-button>
+        </ion-col>
+        <ion-col size="12">
+          <ion-button expand="block">ติดต่อผู้จอง</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-card>
+  </div>
+
+  <div padding *ngIf="currentSeg == 'hotelFinish'">
+    <ion-card *ngFor="let booking of hotelFinishList">
+      <ion-row>
+        <ion-col size="12">
+          <ion-item>
+            <ion-thumbnail slot="start">
+              <img
+                [src]="booking.imgUrl"
+              />
+            </ion-thumbnail>
+            <ion-label>{{booking.name}}</ion-label>
+          </ion-item>
+        </ion-col>
+        <ion-col size="12">
+          <ion-row>
+            <ion-col size="5" class="ion-text-right">
+              <p>วันนำฝาก <br />{{booking.startDate | date: 'dd/MM/yyyy'}}</p>
+            </ion-col>
+            <ion-col size="2" class="ion-text-center">
+              <ion-icon
+                style="margin-top: 20px;"
+                name="arrow-round-forward"
+              ></ion-icon>
+            </ion-col>
+            <ion-col size="5" class="ion-text-left">
+              <p>วันรับกลับ <br />{{booking.endDate | date: 'dd/MM/yyyy'}}</p>
+            </ion-col>
+          </ion-row>
+        </ion-col>
+        <ion-col size="12">
+          <ion-row>
+            <ion-col size="6" class="ion-text-left">
+              <p>สถานะการจอง</p>
+            </ion-col>
+            <ion-col size="6" class="ion-text-right">
+              <p>{{booking.status}}</p>
+            </ion-col>
+          </ion-row>
+        </ion-col>
+      </ion-row>
+    </ion-card>
+  </div>
+
+  <div padding *ngIf="currentSeg == 'hotelCancel'">
+    <ion-card *ngFor="let booking of hotelCancelList">
+      <ion-row>
+        <ion-col size="12">
+          <ion-item>
+            <ion-thumbnail slot="start">
+              <img
+                [src]="booking.imgUrl"
+              />
+            </ion-thumbnail>
+            <ion-label>{{booking.name}}</ion-label>
+          </ion-item>
+        </ion-col>
+        <ion-col size="12">
+          <ion-row>
+            <ion-col size="5" class="ion-text-right">
+              <p>วันนำฝาก <br />{{booking.startDate | date: 'dd/MM/yyyy'}}</p>
+            </ion-col>
+            <ion-col size="2" class="ion-text-center">
+              <ion-icon
+                style="margin-top: 20px;"
+                name="arrow-round-forward"
+              ></ion-icon>
+            </ion-col>
+            <ion-col size="5" class="ion-text-left">
+              <p>วันรับกลับ <br />{{booking.endDate | date: 'dd/MM/yyyy'}}</p>
+            </ion-col>
+          </ion-row>
+        </ion-col>
+        <ion-col size="12">
+          <ion-row>
+            <ion-col size="6" class="ion-text-left">
+              <p>สถานะการจอง</p>
+            </ion-col>
+            <ion-col size="6" class="ion-text-right">
+              <p>{{booking.status}}</p>
+            </ion-col>
+          </ion-row>
         </ion-col>
       </ion-row>
     </ion-card>

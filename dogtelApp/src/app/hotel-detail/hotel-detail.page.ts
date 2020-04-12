@@ -4,6 +4,7 @@ import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { RestService } from '../services/rest.service';
 import * as moment from 'moment';
 import { Storage } from '@ionic/storage';
+import { Router } from '@angular/router';
 declare var google;
 @Component({
   selector: 'app-hotel-detail',
@@ -26,7 +27,8 @@ export class HotelDetailPage implements OnInit {
     type: 'hotel',
     startTime: '',
     endTime: '',
-    status: 'WAITING'
+    status: 'รอการยืนยัน',
+    paymentStatus: 'ยังไม่ได้ชำระเงิน'
   };
 
   constructor(
@@ -34,6 +36,7 @@ export class HotelDetailPage implements OnInit {
     private restApi: RestService,
     public activatedRoute: ActivatedRoute,
     private geolocation: Geolocation,
+    private router: Router
   ) {
     this.activatedRoute.params.subscribe(params => {
       this.hotel = JSON.parse(params.hotel);
@@ -113,7 +116,8 @@ export class HotelDetailPage implements OnInit {
           console.log(res);
           let data: any;
           data = res;
-
+          alert('ทำการจองสำเร็จแล้ว');
+          this.router.navigate(['tabs/tab2']);
         });
       }
     });
