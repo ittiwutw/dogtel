@@ -2,7 +2,8 @@
   <div class="card" padding style="background-color: #fff4cb;" *ngIf="profile">
     <div class="header">
       <div class="ion-text-right">
-        <ion-button>ผู้ให้บริการ</ion-button>
+        <ion-button *ngIf="userRole == 1">ผู้ใช้บริการ</ion-button>
+        <ion-button *ngIf="userRole == 2">โรงแรม</ion-button>
       </div>
       <div class="avatar">
         <ion-row>
@@ -18,7 +19,7 @@
   </div>
   <div class="card-body">
     <div class="user-meta ion-text-center">
-      <ion-list>
+      <ion-list *ngIf="userRole == 1">
         <ion-list-header>
           บัญชีของฉัน
         </ion-list-header>
@@ -35,24 +36,22 @@
       </ion-list>
 
       <ion-list>
-        <ion-item detail>
+        <!-- <ion-item detail>
           <ion-label>ตั้งค่าบัญชีผู้ใช้</ion-label>
+        </ion-item> -->
+        <ion-item detail *ngIf="userRole == 2" routerLink="/add-hotel">
+          <ion-label>จัดการโรงแรม</ion-label>
         </ion-item>
-        <ion-item detail>
+        <!-- <ion-item detail>
           <ion-label>ศูนย์ช่วยเหลือ</ion-label>
-        </ion-item>
-        <ion-item detail>
+        </ion-item> -->
+        <!-- <ion-item detail>
           <ion-label>ติดต่อฝ่ายบริการช่วยเหลือ</ion-label>
-        </ion-item>
-        <ion-item detail>
+        </ion-item> -->
+        <!-- <ion-item detail>
           <ion-label>ภาษา</ion-label>
-        </ion-item>
+        </ion-item> -->
       </ion-list>
-      <br />
-      <ion-button expand="block" color="danger" (click)="logout()"
-        >ออกจากระบบ</ion-button
-      >
-      <br>
       <br>
       <ion-list>
         <ion-item>
@@ -90,4 +89,9 @@
         <ion-button expand="full" color="secondary">@RogerFederer on Twitter</ion-button>
         <ion-button expand="full" color="secondary">View profile at ATP</ion-button> -->
   </div>
+  <br />
+      <ion-button expand="block" color="danger" (click)="logout()"
+        >ออกจากระบบ</ion-button
+      >
+      <br>
 </ion-content>

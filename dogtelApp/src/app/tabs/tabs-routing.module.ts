@@ -73,6 +73,16 @@ const routes: Routes = [
         ]
       },
       {
+        path: 'favs',
+        children: [
+          {
+            path: '',
+            loadChildren: () =>
+              import('../fav/fav.module').then(m => m.FavPageModule)
+          }
+        ]
+      },
+      {
         path: '',
         redirectTo: '/tabs/tab1',
         pathMatch: 'full'

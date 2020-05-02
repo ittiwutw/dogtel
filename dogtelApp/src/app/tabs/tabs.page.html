@@ -11,9 +11,14 @@
       <ion-label>การจอง</ion-label>
     </ion-tab-button>
 
-    <ion-tab-button tab="tab3">
+    <ion-tab-button tab="favs" *ngIf="role == 1">
       <ion-icon name="heart"></ion-icon>
       <ion-label>ถูกใจ</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="favs" *ngIf="role == 2">
+      <ion-icon name="heart"></ion-icon>
+      <ion-label>รีวิว</ion-label>
     </ion-tab-button>
 
     <ion-tab-button tab="tab4">

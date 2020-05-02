@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { RestService } from '../services/rest.service';
 import { Router } from '@angular/router';
 import { Storage } from '@ionic/storage';
+import { Events } from '@ionic/angular';
 
 @Component({
   selector: 'app-account',
@@ -18,7 +19,8 @@ export class AccountPage implements OnInit {
   constructor(
     private restApi: RestService,
     private router: Router,
-    private storage: Storage
+    private storage: Storage,
+    private events: Events
   ) { }
 
   ngOnInit() {
@@ -47,8 +49,9 @@ export class AccountPage implements OnInit {
     // if (this.userRole.approveFlg === '1') {
     this.storage.remove('role').then(res => {
       this.storage.set('role', this.userRole);
-      console.log('current role : ' + this.userRole.userTypeId);
+      console.log('current role : ' + this.userRole);
       // this.isApproveRoleReq = false;
+      this.events.publish('role:changed', this.userRole);
     });
     // } else {
     //   // this.userRole = 1;

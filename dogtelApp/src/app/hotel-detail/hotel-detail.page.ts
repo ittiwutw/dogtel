@@ -16,6 +16,7 @@ export class HotelDetailPage implements OnInit {
   @ViewChild('map', { static: false }) mapContainer: ElementRef;
   map: any;
 
+  isAddedFav = false;
   hotel: any;
 
   bookingDetail = {
@@ -125,6 +126,25 @@ export class HotelDetailPage implements OnInit {
 
   }
 
+  onClickFav() {
+    this.storage.get('favs').then(favs => {
+      let newFav = [];
+      if (favs) {
+        newFav = favs;
+      }
+
+      newFav.push(this.hotel);
+
+      this.storage.set('favs', newFav).then(saved => {
+        this.isAddedFav = true;
+      });
+
+    });
+  }
 
 
 }
+
+
+
+

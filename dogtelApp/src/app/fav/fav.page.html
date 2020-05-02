@@ -1,0 +1,13 @@
+<ion-content>
+  <div padding>
+    <ion-row>
+      <ion-col size="6" *ngFor="let hotel of favs; let i = index">
+        <ion-card class="ion-text-center" (click)="onClickHotel(hotel)">
+          <img [src]="hotel.imgUrl" alt="" style="height: 150px;" />
+          <p><b>{{hotel.name}}</b></p>
+          <ion-button (click)="remove(i)" color="danger">เลิกถูกใจ</ion-button>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </div>
+</ion-content>

@@ -34,6 +34,14 @@ const routes: Routes = [
   {
     path: 'search-result',
     loadChildren: () => import('./search-result/search-result.module').then( m => m.SearchResultPageModule)
+  },
+  {
+    path: 'add-hotel',
+    loadChildren: () => import('./add-hotel/add-hotel.module').then( m => m.AddHotelPageModule)
+  },
+  {
+    path: 'fav',
+    loadChildren: () => import('./fav/fav.module').then( m => m.FavPageModule)
   }
 ];
 @NgModule({
