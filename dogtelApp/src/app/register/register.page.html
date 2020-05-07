@@ -7,10 +7,10 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content style="--ion-background-color: #ecd59f;">
   <ion-card class="welcome-card">
     <ion-card-header>
-      <ion-card-title text-center color="primary">สมัครสมาชิก</ion-card-title>
+      <ion-card-title text-center color="primary">ลงทะเบียน</ion-card-title>
     </ion-card-header>
     <ion-card-content>
       <ion-item>
@@ -22,7 +22,7 @@
         <ion-input [(ngModel)]="password" type="password"></ion-input>
       </ion-item>
       <ion-item>
-        <ion-label position="floating" >Confirm PASSWORD</ion-label>
+        <ion-label position="floating" >Confirm Password</ion-label>
         <ion-input [(ngModel)]="confirmPassword" type="password"></ion-input>
       </ion-item>
       <ion-item>
@@ -30,9 +30,10 @@
         <ion-input [(ngModel)]="email"></ion-input>
       </ion-item>
     </ion-card-content>
+    <img style="height: 150px; width: 150px; margin: auto;" src="/assets/icon/00_profile_dog_0.png" />
 
     <ion-button shape="full" default-button (click)="register()" color="primary"
-      >สมัครสมาชิก</ion-button
+      >ยืนยัน</ion-button
     >
     <!-- Default Input " -->
   </ion-card>

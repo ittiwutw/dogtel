@@ -4,6 +4,8 @@ import * as moment from 'moment';
 import { Storage } from '@ionic/storage';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
+import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-tab2',
   templateUrl: 'tab2.page.html',
@@ -20,10 +22,12 @@ export class Tab2Page {
   hotelProcessingList = [];
   hotelCancelList = [];
   hotelFinishList = [];
+  userData: any;
 
   constructor(
     private storage: Storage,
     private restApi: RestService,
+    private router: Router,
   ) {
 
   }
@@ -44,6 +48,10 @@ export class Tab2Page {
           this.currentSeg = 'hotelBooking';
         }
       }
+    });
+
+    this.storage.get('user').then((val) => {
+      this.userData = val[0];
     });
   }
 
@@ -70,7 +78,7 @@ export class Tab2Page {
 
   getBookingList() {
     this.storage.get('user').then((val) => {
-
+      this.userData = val[0];
       console.log(val);
       if (val) {
         const param = {
@@ -136,11 +144,12 @@ export class Tab2Page {
     });
   }
 
-  cancelBooking(bookingId) {
+  cancelBooking(booking) {
     const param = {
-      bookingId,
+      bookingId: booking.bookingId,
       status: 'ยกเลิก',
-      paymentStatus: 'ยังไม่ได้ชำระเงิน'
+      paymentStatus: 'ยังไม่ได้ชำระเงิน',
+      userId: booking.userId
     };
 
     this.restApi.updateBookingStatus(param).then(res => {
@@ -153,11 +162,12 @@ export class Tab2Page {
     });
   }
 
-  payBooking(bookingId) {
+  payBooking(booking) {
     const param = {
-      bookingId,
+      bookingId: booking.bookingId,
       status: 'กำลังดำเนินการ',
-      paymentStatus: 'ชำระเงินแล้ว'
+      paymentStatus: 'ชำระเงินแล้ว',
+      userId: booking.userId
     };
 
     this.restApi.updateBookingStatus(param).then(res => {
@@ -259,11 +269,12 @@ export class Tab2Page {
     });
   }
 
-  hotelConfirm(bookingId) {
+  hotelConfirm(booking) {
     const param = {
-      bookingId,
+      bookingId: booking.bookingId,
       status: 'รอการชำระเงิน',
-      paymentStatus: 'ยังไม่ได้ชำระเงิน'
+      paymentStatus: 'ยังไม่ได้ชำระเงิน',
+      userId: booking.bookingUserId
     };
 
     this.restApi.updateBookingStatus(param).then(res => {
@@ -276,11 +287,12 @@ export class Tab2Page {
     });
   }
 
-  hotelFinish(bookingId) {
+  hotelFinish(booking) {
     const param = {
-      bookingId,
+      bookingId: booking.bookingId,
       status: 'สำเร็จ',
-      paymentStatus: 'ชำระเงินแล้ว'
+      paymentStatus: 'ชำระเงินแล้ว',
+      userId: booking.bookingUserId
     };
 
     this.restApi.updateBookingStatus(param).then(res => {
@@ -293,11 +305,12 @@ export class Tab2Page {
     });
   }
 
-  hotelCancel(bookingId) {
+  hotelCancel(booking) {
     const param = {
-      bookingId,
+      bookingId: booking.bookingId,
       status: 'ยกเลิก',
-      paymentStatus: 'ยังไม่ได้ชำระเงิน'
+      paymentStatus: 'ยังไม่ได้ชำระเงิน',
+      userId: booking.bookingUserId
     };
 
     this.restApi.updateBookingStatus(param).then(res => {
@@ -308,6 +321,14 @@ export class Tab2Page {
       this.getHotelBookingList();
       this.getHotelProcessingList();
     });
+  }
+
+  onClickReview(booking) {
+    this.router.navigate(['/review', { hotel: JSON.stringify(booking) }]);
+  }
+
+  onClickAsking(booking) {
+    this.router.navigate(['/asking', { hotel: JSON.stringify(booking) }]);
   }
 
 }

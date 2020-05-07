@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { RestService } from '../services/rest.service';
 import { Router } from '@angular/router';
+import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'app-search-hotel',
@@ -18,20 +19,45 @@ export class SearchHotelPage implements OnInit {
     type: 'hotel',
     startTime: '',
     endTime: '',
-    status: 'WAITING'
+    status: 'รอการยืนยัน',
+    paymentStatus: 'ยังไม่ได้ชำระเงิน',
+    roomId: 0,
+    userHotelId: 0,
+    searchDistrict: '',
   };
+
+  dogData = [];
+  userData: any;
 
   constructor(
     private restApi: RestService,
-    private router: Router
+    private router: Router,
+    private storage: Storage,
   ) { }
 
   ngOnInit() {
+    this.loadDog();
   }
 
   onClickSearch() {
+    this.searchCondition.userId = this.userData.id;
     console.log(this.searchCondition);
     this.router.navigate(['tabs/tab1/search-result', { searchCondition: JSON.stringify(this.searchCondition) }]);
+  }
+
+  loadDog() {
+    this.storage.get('user').then((user) => {
+      this.userData = user[0];
+      const param = {
+        userId: user[0].id,
+      };
+      this.restApi.getDogByUserId(param).then(res => {
+        let result: any;
+        result = res;
+        this.dogData = result.data.result;
+        console.log(this.dogData);
+      });
+    });
   }
 
 }

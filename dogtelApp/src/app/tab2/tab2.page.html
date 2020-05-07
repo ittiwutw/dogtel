@@ -78,13 +78,13 @@
           </ion-row>
         </ion-col>
         <ion-col size="12" *ngIf="booking.status != 'รอการยืนยัน'">
-          <ion-button expand="block" color="success" (click)="payBooking(booking.bookingId)" [disabled]="booking.paymentStatus == 'ชำระเงินแล้ว'">ชำระเงิน</ion-button>
+          <ion-button expand="block" color="success" (click)="payBooking(booking)" [disabled]="booking.paymentStatus == 'ชำระเงินแล้ว'">ชำระเงิน</ion-button>
         </ion-col>
         <ion-col size="12">
-          <ion-button expand="block" color="danger" (click)="cancelBooking(booking.bookingId)">ยกเลิกการจอง</ion-button>
+          <ion-button expand="block" color="danger" (click)="cancelBooking(booking)">ยกเลิกการจอง</ion-button>
         </ion-col>
         <ion-col size="12">
-          <ion-button expand="block">ติดต่อผู้ให้บริการ</ion-button>
+          <ion-button expand="block" (click)="onClickAsking(booking)">ติดต่อผู้ให้บริการ</ion-button>
         </ion-col>
       </ion-row>
     </ion-card>
@@ -130,7 +130,7 @@
           </ion-row>
         </ion-col>
         <ion-col size="12">
-          <ion-button expand="block">ติดต่อผู้ให้บริการ</ion-button>
+          <ion-button expand="block" (click)="onClickReview(booking)">รีวิว</ion-button>
         </ion-col>
       </ion-row>
     </ion-card>
@@ -176,7 +176,7 @@
           </ion-row>
         </ion-col>
         <ion-col size="12">
-          <ion-button expand="block">ติดต่อผู้ให้บริการ</ion-button>
+          <ion-button expand="block" (click)="onClickAsking(booking)">ติดต่อผู้ให้บริการ</ion-button>
         </ion-col>
       </ion-row>
     </ion-card>
@@ -222,13 +222,13 @@
           </ion-row>
         </ion-col>
         <ion-col size="6">
-          <ion-button expand="block" color="danger" (click)="hotelCancel(booking.bookingId)">ยกเลิก</ion-button>
+          <ion-button expand="block" color="danger" (click)="hotelCancel(booking)">ยกเลิก</ion-button>
         </ion-col>
         <ion-col size="6" >
-          <ion-button expand="block" color="success" (click)="hotelConfirm(booking.bookingId)" >ยอมรับ</ion-button>
+          <ion-button expand="block" color="success" (click)="hotelConfirm(booking)" >ยอมรับ</ion-button>
         </ion-col>
         <ion-col size="12">
-          <ion-button expand="block">ติดต่อผู้จอง</ion-button>
+          <ion-button expand="block" (click)="onClickAsking(booking)">ติดต่อผู้จอง</ion-button>
         </ion-col>
       </ion-row>
     </ion-card>
@@ -284,10 +284,10 @@
           </ion-row>
         </ion-col>
         <ion-col size="6">
-          <ion-button expand="block" color="danger" (click)="hotelCancel(booking.bookingId)">ยกเลิก</ion-button>
+          <ion-button expand="block" color="danger" (click)="hotelCancel(booking)">ยกเลิก</ion-button>
         </ion-col>
         <ion-col size="6" >
-          <ion-button expand="block" color="success" (click)="hotelFinish(booking.bookingId)" >ลูกค้ารับกลับแล้ว</ion-button>
+          <ion-button expand="block" color="success" (click)="hotelFinish(booking)" >ลูกค้ารับกลับแล้ว</ion-button>
         </ion-col>
         <ion-col size="12">
           <ion-button expand="block">ติดต่อผู้จอง</ion-button>

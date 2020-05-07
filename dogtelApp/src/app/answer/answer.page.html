@@ -1,0 +1,46 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button
+        color="dark"
+        defaultHref="/tabs/tab1"
+      ></ion-back-button>
+    </ion-buttons>
+    <ion-title>ตอบคำถาม</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="ion-padding">
+    <ion-list> 
+      <ion-list-header *ngIf="isHotel">คำถาม</ion-list-header>
+      <ion-list-header *ngIf="!isHotel">คำตอบ</ion-list-header>
+      <ion-item>
+        <ion-label >เรื่อง</ion-label>
+        <ion-input [(ngModel)]="msg.title" disabled="true"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="stacked">ข้อความ</ion-label>
+        <ion-textarea rows="5" placeholder="เขียนข้อความ" [(ngModel)]="msg.detail" disabled="true"></ion-textarea>
+      </ion-item>
+    </ion-list>
+  </div>
+  <div class="ion-padding" *ngIf="isHotel">
+    <ion-list> 
+      <ion-list-header>ตอบคำถาม</ion-list-header>
+      <ion-item>
+        <ion-label >เรื่อง</ion-label>
+        <ion-input [(ngModel)]="answer.title" ></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="stacked">ข้อความ</ion-label>
+        <ion-textarea rows="5" placeholder="เขียนข้อความ" [(ngModel)]="answer.detail" ></ion-textarea>
+      </ion-item>
+    </ion-list>
+  </div>
+</ion-content>
+<ion-footer>
+  <div style="background-color: #265f62;" class="ion-text-center ion-padding" (click)="onClickSave()">
+    <span style="color: #ffffff;">ตอบคำถาม</span>
+  </div>
+</ion-footer>

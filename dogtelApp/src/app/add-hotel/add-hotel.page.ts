@@ -3,6 +3,7 @@ import { RestService } from '../services/rest.service';
 import { Router } from '@angular/router';
 import { Storage } from '@ionic/storage';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
+import { Camera, CameraOptions } from '@ionic-native/Camera/ngx';
 declare var google;
 
 @Component({
@@ -14,6 +15,10 @@ export class AddHotelPage implements OnInit {
 
   @ViewChild('map', { static: false }) mapContainer: ElementRef;
   map: any;
+  base64ImgIdCard1: any;
+  base64ImgIdCard2: any;
+  base64ImgIdCard3: any;
+  base64ImgHotelImg: any;
 
   currentStep = 1;
 
@@ -33,14 +38,18 @@ export class AddHotelPage implements OnInit {
     closeTime: '',
     imgUrl: 'https://metropolisjapan.com/wp-content/uploads/2018/06/Wancott-playing-with-dogs.jpg',
     lat: '',
-    lng: ''
+    lng: '',
+    idcard1: '',
+    idcard2: '',
+    idcard3: ''
   };
 
   constructor(
     private router: Router,
     private restApi: RestService,
     private storage: Storage,
-    private geolocation: Geolocation
+    private geolocation: Geolocation,
+    private camera: Camera,
   ) { }
 
   ngOnInit() {
@@ -108,8 +117,45 @@ export class AddHotelPage implements OnInit {
         this.currentStep++;
       });
     });
+  }
 
+  onClickFinish() {
+    this.router.navigateByUrl('/tabs/account');
+  }
 
+  pickImage(type) {
+    // this.completePayment();
+    const options: CameraOptions = {
+      quality: 100,
+      sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
+      destinationType: this.camera.DestinationType.DATA_URL,
+      encodingType: this.camera.EncodingType.JPEG,
+      mediaType: this.camera.MediaType.PICTURE
+    };
+    this.camera.getPicture(options).then((imageData) => {
+      // imageData is either a base64 encoded string or a file URI
+      // If it's base64 (DATA_URL):
+      if (type === 'idcard1') {
+        this.base64ImgIdCard1 = 'data:image/jpeg;base64,' + imageData;
+        this.hotel.idcard1 = imageData;
+        console.log(this.base64ImgIdCard1);
+      } else if (type === 'idcard2') {
+        this.base64ImgIdCard2 = 'data:image/jpeg;base64,' + imageData;
+        this.hotel.idcard2 = imageData;
+        console.log(this.base64ImgIdCard2);
+      } else if (type === 'idcard3') {
+        this.base64ImgIdCard3 = 'data:image/jpeg;base64,' + imageData;
+        this.hotel.idcard3 = imageData;
+        console.log(this.base64ImgIdCard3);
+      } else if (type === 'hotelImg') {
+        this.base64ImgHotelImg = 'data:image/jpeg;base64,' + imageData;
+        this.hotel.imgUrl = imageData;
+        console.log(this.base64ImgHotelImg);
+      }
+
+    }, (err) => {
+      // Handle error
+    });
   }
 
 }

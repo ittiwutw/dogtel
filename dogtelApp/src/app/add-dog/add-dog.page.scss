@@ -1,0 +1,14 @@
+ion-input, ion-datetime, ion-select, ion-textarea {
+    --background: transparent !important;
+    --padding-bottom: 10px;
+    --padding-end: 0;
+    --padding-start: 0;
+    --padding-top: 10px;
+  //   margin: 16px 16px !important;
+    // width: calc(100% - 32px);
+    border: 1px solid lightgrey;
+    // text-align: left !important;
+    padding-left: 10px !important;
+    width: 100%;
+    border-radius: 10px;
+  }

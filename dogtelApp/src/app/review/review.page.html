@@ -1,0 +1,61 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button
+        color="light"
+        defaultHref="/tabs/tab2"
+      ></ion-back-button>
+    </ion-buttons>
+    <ion-title>เรตติ้งของฉัน </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content style="--ion-background-color: #e2e2e2;">
+  <br />
+  <div style="background-color: #ffff;" class="ion-text-center ion-padding">
+    <ion-row>
+      <ion-col size="4" class="ion-text-center">
+        <img [src]="hotel.imgUrl" alt="" style="height: 100px;"/>
+      </ion-col>
+      <ion-col size="8" class="ion-text-left">
+        <p>{{hotel.name}}</p>
+      </ion-col>
+      <ion-col size="12" class="ion-text-center">
+        <div style="border: 0.5px solid #e2e2e2; margin-bottom: -30px;"></div>
+      </ion-col>
+      <ion-col size="12" class="ion-text-center">
+        <ion-row>
+          <ion-col size="12">
+            <img
+              *ngFor="let star of stars"
+              style="width: 50px; height: 50px;"
+              src="/assets/icon/H_edithotel_2_star.png"
+            />
+          </ion-col>
+        </ion-row>
+      </ion-col>
+      <ion-col size="12" class="ion-text-left">
+        <ion-select placeholder="ให้คะนน" [(ngModel)]="review.stars" (ionChange)="changeStar()">
+          <ion-select-option value="1">1 ดาว</ion-select-option>
+          <ion-select-option value="2">2 ดาว</ion-select-option>
+          <ion-select-option value="3">3 ดาว</ion-select-option>
+          <ion-select-option value="4">4 ดาว</ion-select-option>
+          <ion-select-option value="5">5 ดาว</ion-select-option>
+        </ion-select>
+      </ion-col>
+      <ion-col size="12" class="ion-text-left">
+        <ion-textarea
+          [(ngModel)]="review.review"
+          rows="5"
+          placeholder="รีวิวการให้บริการในครั้งนี้ เพื่อให้คนอื่นๆได้รู้"
+          style="border: 1px solid #e2e2e2; background-color: #e2e2e2;"
+        ></ion-textarea>
+      </ion-col>
+    </ion-row>
+  </div>
+</ion-content>
+<ion-footer>
+  <div style="background-color: #265f62;" class="ion-text-center ion-padding" (click)="onClickSave()">
+    <span style="color: #ffffff;">ยืนยัน</span>
+  </div>
+</ion-footer>

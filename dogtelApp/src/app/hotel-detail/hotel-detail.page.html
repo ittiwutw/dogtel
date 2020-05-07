@@ -9,7 +9,7 @@
     <ion-title> </ion-title>
   </ion-toolbar>
 </ion-header>
-<ion-content *ngIf="hotel">
+<ion-content *ngIf="hotel" style="--ion-background-color: #ecd59f;">
   <div padding>
     <ion-card class="ion-text-center">
       <img [src]="hotel.imgUrl" alt="" />
@@ -19,8 +19,10 @@
         <span style="font-size: 2rem; padding-left: 5px;">{{hotel.name}}</span>
       </ion-col>
       <ion-col size="4" class="ion-text-right">
-        <ion-icon name="heart" style="font-size: 3rem;" color="dark" *ngIf="!isAddedFav" (click)="onClickFav()"></ion-icon>
-        <ion-icon name="heart" style="font-size: 3rem;" color="success" *ngIf="isAddedFav"></ion-icon>
+        <img src="../../assets/icon/like.png" alt="" style="width: 40%;" *ngIf="!isAddedFav" (click)="onClickFav()"/>
+        <img src="../../assets/icon/00_like.png" alt="" style="width: 40%;" *ngIf="isAddedFav"/>
+        <!-- <ion-icon name="heart" style="font-size: 3rem;" color="dark" *ngIf="!isAddedFav" (click)="onClickFav()"></ion-icon> -->
+        <!-- <ion-icon name="heart" style="font-size: 3rem;" color="success" *ngIf="isAddedFav"></ion-icon> -->
       </ion-col>
       <ion-col size="2" class="ion-text-left">
         <span style="padding-left: 5px;">สถานที่</span>
@@ -87,8 +89,11 @@
     <ion-card>
       <ion-item>
         <ion-label>เลือกสุนัขที่ต้องการ</ion-label>
-        <ion-select placeholder="เลือก" [(ngModel)]="bookingDetail.dogId">
+        <!-- <ion-select placeholder="เลือก" [(ngModel)]="bookingDetail.dogId">
           <ion-select-option value="1">เต้าหู้</ion-select-option>
+        </ion-select> -->
+        <ion-select placeholder="เลือก" [value]="bookingDetail.dogId" [(ngModel)]="bookingDetail.dogId">
+          <ion-select-option *ngFor="let dog of dogData" [value]="dog.id">{{dog.dogName}}</ion-select-option>
         </ion-select>
       </ion-item>
     </ion-card>
@@ -96,8 +101,8 @@
   <ion-card>
     <ion-item>
       <ion-label>ราคา</ion-label>
-      <ion-select placeholder="เลือกห้องที่ต้องการ">
-        <ion-select-option value="f">1000</ion-select-option>
+      <ion-select placeholder="เลือกห้องที่ต้องการ" [(ngModel)]="bookingDetail.roomId">
+        <ion-select-option *ngFor="let room of rooms" [value]="room.roomId">{{room.roomName}}</ion-select-option>
       </ion-select>
     </ion-item>
   </ion-card>
@@ -115,6 +120,44 @@
       Treadmill
     </ion-item>
   </ion-list>
+  <ion-list>
+    <ion-list-header>
+      <strong>รีวิว</strong>
+    </ion-list-header>
+    </ion-list>
+  <div style="background-color: #ffff;" class="ion-text-center ion-padding" *ngFor="let review of reviewlist">
+    
+    <ion-row>
+      <ion-col size="2" class="ion-text-center">
+        <ion-avatar>
+          <img src="../../assets/icon/favicon.png" alt="" />
+        </ion-avatar>
+      </ion-col>
+      <ion-col size="10" class="ion-text-left">
+        <p>{{review.username}}</p>
+      </ion-col>
+      <ion-col size="2" class="ion-text-center"></ion-col>
+      <ion-col size="10" class="ion-text-left">
+        <ion-row>
+          <ion-col size="12" style="margin-top: -20px; margin-left: -5px;">
+            <img *ngFor="let start of calStar(review.star)"
+              style="width: 20px; height: 20px;"
+              src="/assets/icon/H_edithotel_2_star.png"
+            />
+          </ion-col>
+        </ion-row>
+      </ion-col>
+      <ion-col size="2" class="ion-text-center"></ion-col>
+      <ion-col size="10" class="ion-text-left" style="margin-top: -20px;">
+        <p style="color: #8a8787; font-size: 0.8rem;">{{review.review}}</p>
+      </ion-col>
+    </ion-row>
+    <ion-col size="12" class="ion-text-center">
+      <div style="border: 0.5px solid #e2e2e2; margin-bottom: -30px;"></div>
+    </ion-col>
+  </div>
+  <br>
+  <ion-button expand="block" (click)="onClickAsking()">ติดต่อสอบถาม</ion-button>
 </ion-content>
 <ion-footer>
   <ion-button expand="block" (click)="onClickBook()">จอง</ion-button>

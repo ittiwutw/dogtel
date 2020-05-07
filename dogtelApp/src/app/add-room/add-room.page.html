@@ -1,0 +1,57 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button
+        color="dark"
+        defaultHref="/tabs/account"
+      ></ion-back-button>
+    </ion-buttons>
+    <ion-title></ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="ion-text-center ion-padding">
+    <img
+      (click)="pickImage()"
+      *ngIf="!base64Img"
+      src="../../assets/icon/add_photo.png"
+      alt=""
+      style="margin: auto; width: 60%;"
+    />
+    <img
+      (click)="pickImage()"
+      *ngIf="base64Img"
+      [src]="base64Img"
+      alt=""
+      style="margin: auto; width: 60%;"
+    />
+  </div>
+  <div class="ion-text-center ion-padding" style="padding-top: 0px;">
+    <ion-list>
+      <ion-item>
+        <ion-label>ชื่อห้อง</ion-label>
+        <ion-input [(ngModel)]="roomData.roomName"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>คำอธิบาย</ion-label>
+        <ion-textarea rows="3" [(ngModel)]="roomData.detail"></ion-textarea>
+      </ion-item>
+      <ion-list-header>ขนาดห้อง (กว้าง x ยาว x สูง)</ion-list-header>
+      <ion-item>
+        <ion-input placeholder="กว้าง" [(ngModel)]="roomData.sizeLength"></ion-input>
+        <ion-input placeholder="ยาว" [(ngModel)]="roomData.sizeWidth"></ion-input>
+        <ion-input placeholder="สูง" [(ngModel)]="roomData.sizeHeight"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>ราคา</ion-label>
+        <ion-input [(ngModel)]="roomData.price"></ion-input>
+      </ion-item>
+    </ion-list>
+  </div>
+</ion-content>
+<ion-footer>
+  <ion-button expand="block" (click)="onClickSave()">
+    ยืนยัน
+  </ion-button>
+</ion-footer>

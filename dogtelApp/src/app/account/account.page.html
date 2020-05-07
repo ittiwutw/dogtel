@@ -1,17 +1,40 @@
-<ion-content *ngIf="userData" style="background-color: bisque;">
+<ion-content
+  *ngIf="userData"
+  style="--ion-background-color: #ecd59f;"
+  style="background-color: bisque;"
+>
   <div class="card" padding style="background-color: #fff4cb;" *ngIf="profile">
-    <div class="header">
-      <div class="ion-text-right">
-        <ion-button *ngIf="userRole == 1">ผู้ใช้บริการ</ion-button>
-        <ion-button *ngIf="userRole == 2">โรงแรม</ion-button>
+      <div>
+        <ion-row>
+          <ion-col size="12" class="ion-text-right">
+            <img src="../../assets/icon/H_pro_mes_0.png" alt="" style="height: 40px;" routerLink="/message"/>
+          </ion-col>
+        </ion-row>
       </div>
+    <div class="header">
+      <!-- <div class="ion-text-right">
+        <ion-button *ngIf="userRole == 1" (click)="presentAlertRadio()"
+          >ผู้ใช้บริการ</ion-button
+        >
+        <ion-button *ngIf="userRole == 2" (click)="presentAlertRadio()"
+          >ผู้ให้บริการ</ion-button
+        >
+      </div> -->
       <div class="avatar">
         <ion-row>
           <ion-col size="4" class="ion-text-center">
             <img src="../../assets/icon/favicon.png" alt="" />
           </ion-col>
-          <ion-col size="8">
+          <ion-col size="4">
             <p>Username : {{profile.username}}</p>
+          </ion-col>
+          <ion-col size="4">
+            <ion-button *ngIf="userRole == 1" (click)="presentAlertRadio()"
+            >ผู้ใช้บริการ</ion-button
+          >
+          <ion-button *ngIf="userRole == 2" (click)="presentAlertRadio()"
+            >ผู้ให้บริการ</ion-button
+          >
           </ion-col>
         </ion-row>
       </div>
@@ -26,35 +49,66 @@
         <ion-item detail>
           <ion-label>ข้อมูลส่วนตัว</ion-label>
         </ion-item>
-        <ion-item>
-          <ion-label>ข้อมูลสุนัข</ion-label>
-        </ion-item>
         <div class="ion-text-left ion-padding">
-          <img src="../../assets/icon/favicon.png" alt="" class="ion-padding" />
-          <img src="../../assets/icon/favicon.png" alt="" class="ion-padding" />
+          <p>ข้อมูลสุนัข</p>
+          <ion-row>
+            <ion-col
+              size="4"
+              *ngFor="let dog of dogData"
+              style="height: 130px; width: 200px;"
+            >
+              <ion-avatar
+                (click)="onClickDog(dog)"
+                style="height: 100%; width: 100%;"
+              >
+                <img [src]="dog.dogImgUrl" alt="" class="ion-padding" />
+              </ion-avatar>
+            </ion-col>
+            <ion-col
+              size="4"
+              style="height: 130px; width: 200px;"
+            >
+              <ion-avatar
+                style="height: 100%; width: 100%;"
+              >
+                <img
+                  src="../../assets/icon/add_dog.png"
+                  alt=""
+                  class="ion-padding"
+                  routerLink="/add-dog"
+                />
+              </ion-avatar>
+            </ion-col>
+          </ion-row>
         </div>
       </ion-list>
 
+      <ion-list *ngIf="userRole == 2">
+        <ion-item detail routerLink="/my-hotel">
+          <ion-label>แก้ไขข้อมูลส่วนตัว</ion-label>
+        </ion-item>
+        <ion-item detail routerLink="/my-hotel">
+          <ion-label>เพิ่มห้อง</ion-label>
+        </ion-item>
+        <ion-item detail routerLink="/tabs/rating">
+          <ion-label>เรตติ้งคะแนน</ion-label>
+        </ion-item>
+      </ion-list>
+      <br />
       <ion-list>
         <!-- <ion-item detail>
           <ion-label>ตั้งค่าบัญชีผู้ใช้</ion-label>
-        </ion-item> -->
-        <ion-item detail *ngIf="userRole == 2" routerLink="/add-hotel">
-          <ion-label>จัดการโรงแรม</ion-label>
         </ion-item>
-        <!-- <ion-item detail>
+        <ion-item detail>
           <ion-label>ศูนย์ช่วยเหลือ</ion-label>
-        </ion-item> -->
-        <!-- <ion-item detail>
+        </ion-item>
+        <ion-item detail>
           <ion-label>ติดต่อฝ่ายบริการช่วยเหลือ</ion-label>
-        </ion-item> -->
-        <!-- <ion-item detail>
+        </ion-item>
+        <ion-item detail>
           <ion-label>ภาษา</ion-label>
         </ion-item> -->
-      </ion-list>
-      <br>
-      <ion-list>
-        <ion-item>
+        <!-- <ion-item>
           <ion-label>บทบาท</ion-label>
           <ion-select [(ngModel)]="userRole" (ionChange)="changeRole()">
             <ion-select-option
@@ -63,35 +117,34 @@
               >{{role.userTypeName}}</ion-select-option
             >
           </ion-select>
-        </ion-item>
-        <div *ngFor="let role of userData">
+        </ion-item> -->
+        <!-- <div *ngFor="let role of userData">
           <ion-item *ngIf="role.userTypeId != 1">
             <ion-label>การยืนยันตัวตน {{role.userTypeName}}</ion-label>
-            <p *ngIf="role.approveFlg == 0 " style="color: #f04141">
+            <p *ngIf="role.approveFlg == 0 " style="color: #f04141;">
               ยังไม่ได้ยืนยันตัวตน
             </p>
-            <p *ngIf="role.approveFlg == 2" style="color: #a2a4ab">
+            <p *ngIf="role.approveFlg == 2" style="color: #a2a4ab;">
               รอการอนุมัติ
             </p>
-            <p *ngIf="role.approveFlg == 1" style="color: #0ec254">
+            <p *ngIf="role.approveFlg == 1" style="color: #0ec254;">
               ยืนยันตัวตนแล้ว
             </p>
           </ion-item>
-        </div>
+        </div> -->
       </ion-list>
       <br />
       <!-- <ion-button expand="block" color="warning" *ngIf="isApproveRoleReq"
         >กรุณายืนยันตัวตน</ion-button
       > -->
-      
     </div>
     <!-- <ion-button expand="full" color="primary">http://rogerfederer.com</ion-button>
         <ion-button expand="full" color="secondary">@RogerFederer on Twitter</ion-button>
         <ion-button expand="full" color="secondary">View profile at ATP</ion-button> -->
   </div>
   <br />
-      <ion-button expand="block" color="danger" (click)="logout()"
-        >ออกจากระบบ</ion-button
-      >
-      <br>
+  <ion-button expand="block" color="danger" (click)="logout()"
+    >ออกจากระบบ</ion-button
+  >
+  <br />
 </ion-content>

@@ -8,7 +8,132 @@
 </ion-header>
 
 <ion-content>
-  <ion-list class="ion-padding" *ngIf="currentStep == 1">
+  <div *ngIf="currentStep == 1">
+    <div
+      style="background-color: #94bcf7; height: 150px;"
+      class="ion-text-center"
+    >
+      <img style="height: 150px; margin: auto;" src="/assets/icon/idcard.png" />
+      <p style="margin-top: -40px; color: #ffff;">
+        กรุณากรอกข้อมูลให้ตรงกับบัตรประชาชน
+      </p>
+    </div>
+    <ion-list class="ion-padding">
+      <ion-list-header
+        ><b style="font-size: 1rem;">เลขประจำตัวประชาชน</b></ion-list-header
+      >
+      <ion-item>
+        <!-- <ion-label position="floating">หมายเลขบัตรประจำตัวประชาชน</ion-label> -->
+        <ion-input
+          type="text"
+          [(ngModel)]="hotel.province"
+          placeholder="หมายเลขบัตรประจำตัวประชาชน"
+        ></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating"
+          >หมายเลขหลังบัตรประจำตัวประชาชน</ion-label
+        >
+        <ion-input type="text" [(ngModel)]="hotel.district"></ion-input>
+      </ion-item>
+      <ion-list-header
+        ><b style="font-size: 1rem;">ชื่อ - นามสกุล</b></ion-list-header
+      >
+      <ion-item>
+        <ion-label position="floating">ชื่อจริง</ion-label>
+        <ion-input type="text" [(ngModel)]="hotel.subDistrict"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">นามสกุล</ion-label>
+        <ion-input type="text" [(ngModel)]="hotel.postalCode"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">ชื่อจริงภาษาอังกฤษ</ion-label>
+        <ion-input type="text" [(ngModel)]="hotel.postalCode"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">นามสกุลภาษาอังกฤษ</ion-label>
+        <ion-input type="text" [(ngModel)]="hotel.postalCode"></ion-input>
+      </ion-item>
+      <ion-list-header
+        ><b style="font-size: 1rem;">ข้อมูลอื่นๆ</b></ion-list-header
+      >
+      <ion-item>
+        <ion-label position="floating">วันเกิด</ion-label>
+        <ion-input type="text" [(ngModel)]="hotel.postalCode"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">รหัสไปรษณีย์</ion-label>
+        <ion-input type="text" [(ngModel)]="hotel.postalCode"></ion-input>
+      </ion-item>
+    </ion-list>
+  </div>
+
+  <div *ngIf="currentStep == 2">
+    <div
+      style="background-color: #94bcf7; height: 150px;"
+      class="ion-text-center"
+    >
+      <img
+        style="height: 150px; margin: auto;"
+        src="/assets/icon/idcard_show.png"
+      />
+      <p style="margin-top: -40px; color: #ffff;">ภาพถ่ายบัตรประชาชน</p>
+    </div>
+    <div class="ion-text-center">
+      <p>ภาพบัตรประชาชนด้านหน้า</p>
+      <img
+        (click)="pickImage('idcard1')"
+        *ngIf="!base64ImgIdCard1"
+        src="../../assets/icon/add_photo.png"
+        alt=""
+        style="margin: auto; width: 40%; "
+      />
+      <img
+        (click)="pickImage('idcard1')"
+        *ngIf="base64ImgIdCard1"
+        [src]="base64ImgIdCard1"
+        alt=""
+        style="margin: auto; width: 40%; "
+      />
+    </div>
+    <div class="ion-text-center">
+      <p>ภาพบัตรประชาชนด้านหลัง</p>
+      <img
+        (click)="pickImage('idcard2')"
+        *ngIf="!base64ImgIdCard2"
+        src="../../assets/icon/add_photo.png"
+        alt=""
+        style="margin: auto; width: 40%; "
+      />
+      <img
+        (click)="pickImage('idcard2')"
+        *ngIf="base64ImgIdCard2"
+        [src]="base64ImgIdCard2"
+        alt=""
+        style="margin: auto; width: 40%; "
+      />
+    </div>
+    <div class="ion-text-center">
+      <p>ภาพถ่ายหน้าตรงพร้อมถือบัตรประชาชน</p>
+      <img
+        (click)="pickImage('idcard3')"
+        *ngIf="!base64ImgIdCard3"
+        src="../../assets/icon/add_photo.png"
+        alt=""
+        style="margin: auto; width: 40%; "
+      />
+      <img
+        (click)="pickImage('idcard3')"
+        *ngIf="base64ImgIdCard3"
+        [src]="base64ImgIdCard3"
+        alt=""
+        style="margin: auto; width: 40%; "
+      />
+    </div>
+  </div>
+
+  <ion-list class="ion-padding" *ngIf="currentStep == 3">
     <ion-list-header>สถานที่รับฝากตั้งอยู่ที่ไหน?</ion-list-header>
     <ion-item>
       <ion-label position="floating">จังหวัด</ion-label>
@@ -39,12 +164,12 @@
       <ion-input type="text" [(ngModel)]="hotel.lng"></ion-input>
     </ion-item>
   </ion-list>
-  <div class="ion-padding" *ngIf="currentStep == 1">
+  <div class="ion-padding" *ngIf="currentStep == 3">
     <p>เลือกที่อยู่</p>
   </div>
-  <div #map id="map"></div>
+  <div #map id="map" *ngIf="currentStep == 3"></div>
   <br />
-  <ion-list class="ion-padding" *ngIf="currentStep == 2">
+  <ion-list class="ion-padding" *ngIf="currentStep == 4">
     <ion-list-header>ข้อมูลที่พัก</ion-list-header>
     <ion-item>
       <ion-label position="floating">ชื่อสถานที่</ion-label>
@@ -52,21 +177,36 @@
     </ion-item>
     <ion-item>
       <ion-label position="stacked">ข้อมูลที่พัก</ion-label>
-      <ion-input placeholder="ชื่อจริง" [(ngModel)]="hotel.firstName"></ion-input>
-      <ion-input placeholder="นามสกุล" [(ngModel)]="hotel.lastName "></ion-input>
-      <ion-input placeholder="เลขที่จดทะเบียนสถานที่" [(ngModel)]="hotel.registerNo"></ion-input>
+      <ion-input
+        placeholder="ชื่อจริง"
+        [(ngModel)]="hotel.firstName"
+      ></ion-input>
+      <ion-input
+        placeholder="นามสกุล"
+        [(ngModel)]="hotel.lastName "
+      ></ion-input>
+      <ion-input
+        placeholder="เลขที่จดทะเบียนสถานที่"
+        [(ngModel)]="hotel.registerNo"
+      ></ion-input>
     </ion-item>
     <ion-list-header>เวลาทำการ</ion-list-header>
     <ion-item>
       <ion-label position="floating">เวลาเปิด</ion-label>
-      <ion-datetime displayFormat="HH:mm" [(ngModel)]="hotel.openTime"></ion-datetime>
+      <ion-datetime
+        displayFormat="HH:mm"
+        [(ngModel)]="hotel.openTime"
+      ></ion-datetime>
     </ion-item>
     <ion-item>
       <ion-label position="floating">เวลาปิด</ion-label>
-      <ion-datetime displayFormat="HH:mm" [(ngModel)]="hotel.closeTime"></ion-datetime>
+      <ion-datetime
+        displayFormat="HH:mm"
+        [(ngModel)]="hotel.closeTime"
+      ></ion-datetime>
     </ion-item>
   </ion-list>
-  <ion-list class="ion-padding" *ngIf="currentStep == 3">
+  <ion-list class="ion-padding" *ngIf="currentStep == 5">
     <ion-list-header>สถานที่ของท่านมีบริการอะไรบ้าง</ion-list-header>
     <ion-item>
       <ion-label>สระว่ายน้ำ</ion-label>
@@ -85,11 +225,19 @@
       <ion-checkbox slot="end"></ion-checkbox>
     </ion-item>
   </ion-list>
-  <ion-list class="ion-padding" *ngIf="currentStep == 4">
+  <ion-list class="ion-padding" *ngIf="currentStep == 6">
     <ion-list-header>สถานที่ของท่านมีลักษณะอย่างไร?</ion-list-header>
-    <ion-button expand="full">เลือกรูปภาพ</ion-button>
+    <ion-button expand="full" (click)="pickImage('hotelImg')">เลือกรูปภาพ</ion-button>
+    <div class="ion-text-center">
+      <img
+        *ngIf="base64ImgHotelImg"
+        [src]="base64ImgHotelImg"
+        alt=""
+        style="margin: auto; width: 60%; "
+      />
+    </div>
   </ion-list>
-  <div *ngIf="currentStep == 5" class="ion-padding" style="padding-left: 30px;">
+  <div *ngIf="currentStep == 7" class="ion-padding" style="padding-left: 30px;">
     <strong>ข้อมูลสถานที่รับฝาก</strong>
     <br />
     <br />
@@ -104,26 +252,46 @@
     <strong>สถานที่ตั้ง</strong>
     <ion-item>
       <ion-label>จังหวัด</ion-label>
-      <ion-input type="text" [(ngModel)]="hotel.province" disabled="true"></ion-input>
+      <ion-input
+        type="text"
+        [(ngModel)]="hotel.province"
+        disabled="true"
+      ></ion-input>
     </ion-item>
     <ion-item>
       <ion-label>อำเภอ</ion-label>
-      <ion-input type="text" [(ngModel)]="hotel.district" disabled="true"></ion-input>
+      <ion-input
+        type="text"
+        [(ngModel)]="hotel.district"
+        disabled="true"
+      ></ion-input>
     </ion-item>
     <ion-item>
       <ion-label>ตำบล</ion-label>
-      <ion-input type="text" [(ngModel)]="hotel.subDistrict" disabled="true"></ion-input>
+      <ion-input
+        type="text"
+        [(ngModel)]="hotel.subDistrict"
+        disabled="true"
+      ></ion-input>
     </ion-item>
     <ion-item>
       <ion-label>รหัสไปรษณีย์</ion-label>
-      <ion-input type="text" [(ngModel)]="hotel.postalCode" disabled="true"></ion-input>
+      <ion-input
+        type="text"
+        [(ngModel)]="hotel.postalCode"
+        disabled="true"
+      ></ion-input>
     </ion-item>
     <ion-item>
       <ion-label position="stacked">อาคาร, บ้านเลขที่, ถนนและอื่นๆ</ion-label>
-      <ion-textarea rows="3" [(ngModel)]="hotel.houseNo" disabled="true"></ion-textarea>
+      <ion-textarea
+        rows="3"
+        [(ngModel)]="hotel.houseNo"
+        disabled="true"
+      ></ion-textarea>
     </ion-item>
   </div>
-  <div *ngIf="currentStep == 6" class="ion-padding" style="padding-left: 30px;">
+  <div *ngIf="currentStep == 8" class="ion-padding" style="padding-left: 30px;">
     <strong
       >ข้อมูลสำคัญที่ท่านควรทราบก่อนลงทะเบียนเปิดจองสถานที่รับฝากบน
       Dogtel</strong
@@ -131,25 +299,29 @@
     <br />
     <p>XXXX</p>
   </div>
-  <div *ngIf="currentStep == 7" class="ion-padding" style="padding-left: 30px;">
+  <div *ngIf="currentStep == 9" class="ion-padding" style="padding-left: 30px;">
     <strong>เรียบร้อย! ท่านได้ลงทะเบียนทุกอย่างอย่างในเบื้องต้นแล้ว</strong>
     <br />
     <p>หลังจากลงทะเบียนเสร็จจะสามารถทำรายการต่อไปนี้ได้</p>
   </div>
 </ion-content>
 <ion-footer>
-  <div class="ion-text-center ion-padding" *ngIf="currentStep == 7">
+  <div
+    class="ion-text-center ion-padding"
+    *ngIf="currentStep == 9"
+    (click)="onClickFinish()"
+  >
     <!-- <ion-button expand="full">เพิ่มห้องสำหรับการเปิดจอง</ion-button>
     <br> -->
     <strong>กลับสู่หน้าหลัก</strong>
   </div>
-  <ion-row *ngIf="currentStep != 7">
-    <ion-col size="12" *ngIf="currentStep == 5">
+  <ion-row *ngIf="currentStep != 9">
+    <ion-col size="12" *ngIf="currentStep == 7">
       <ion-item>
         <ion-label>ฉันยืนยันว่าชื่อและสถานที่ถูกต้อง</ion-label>
         <ion-checkbox slot="start"></ion-checkbox>
       </ion-item>
-      <br>
+      <br />
     </ion-col>
     <ion-col size="2">
       <ion-back-button
@@ -164,13 +336,15 @@
       ></ion-button>
     </ion-col>
     <ion-col size="10">
-      <ion-button expand="full" (click)="onClickNextStep()" *ngIf="currentStep != 5"
+      <ion-button
+        expand="full"
+        (click)="onClickNextStep()"
+        *ngIf="currentStep != 7"
         >ดำเนินการต่อ</ion-button
       >
-      <ion-button expand="full" (click)="onClickSave()" *ngIf="currentStep == 5"
+      <ion-button expand="full" (click)="onClickSave()" *ngIf="currentStep == 7"
         >ยืนยันข้อมูล</ion-button
       >
-      </ion-col
-    >
+    </ion-col>
   </ion-row>
 </ion-footer>

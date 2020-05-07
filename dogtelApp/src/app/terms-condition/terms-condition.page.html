@@ -1,0 +1,95 @@
+<!-- lOGIN FROMA --COMPONENT 1 -->
+
+<!-- Content -->
+<ion-content class="transparent background-size" style="--ion-background-color: #ecd59f;">
+  <ion-grid class="ion-no-padding">
+    <ion-row class="ion-align-items-center ion-padding-horizontal">
+      <ion-col
+        class="ion-text-center ion-margin-top"
+        size="12"
+        size-md="8"
+        push-md="2"
+      >
+        <h1>เงื่อนไขการยินยอม / ข้อตกลง</h1>
+      </ion-col>
+      <ion-col class="ion-no-padding" size="12" size-md="8" push-md="2">
+        <!---Form-->
+        <form class="ion-margin-vertical ion-text-center ion-padding-vertical">
+          <ion-content style="--ion-background-color: #ffff;">
+            <div scrollY="true" id="myFixZone">
+              นัดหมอและทีมงาน
+              ขอขอบพระคุณทุกท่านที่ได้ให้ความไว้วางใจในการใช้บริการ Application
+              นัดหมอ ของเรา ซึ่งเราได้ตระหนักถึงความสำคัญ
+              ตลอดทั้ง(https://www.nutmor.com)
+              ทุ่มเทในการพัฒนาระบบรักษาความปลอดภัยด้วยเทคโนโลยีอันทันสมัย
+              มีการเฝ้าระวัง และตรวจสอบเว็บไซต์ให้มีความปลอดภัยอย่างสม่ำเสมอ
+              เพื่อพร้อมให้บริการสำหรับท่านตลอดไป
+              <br /><br />
+              เกี่ยวกับนัดหมอ <br />
+              โคเบนฮาว (Cobenhavn) เป็นเจ้าของเว็บไซต์ https://www.nutmor.com
+              และมี Softubon เป็นผู้พัฒนาและดูแลระบบ นัดหมอหรือ Nutmor.com
+              เป็นเว็บไซต์รวบรวม สถานพยาบาล
+              เพื่อให้คนไข้ได้นัดหมายแพทย์ในช่วงเวลาที่สะดวก
+              และอำนวยความสะดวกเพื่อให้คลินิกได้จัดสรร
+              ทรัพยากรให้เหมาะสมกับจำนวนลูกค้าในแต่ละช่วงเวลา
+              นัดหมอจะไม่เกี่ยวข้องกับการวินิจฉัย และการรักษาใดๆ
+              ซึ่งล้วนเป็นดุลยพินิจกิจกรรมของแพทย์แต่ละสถานบริการ
+              ข้อมูลจะเป็นไปเพื่อช่วยท่านประกอบการตัดสินใจเลือกสถานพยาบาลต่างๆเท่านั้น
+              อีกทั้งระบบทำได้เพียงการนัดหมายเวลาเพียงคร่าวๆ
+              ไม่สามารถรับประกันได้ว่าจะได้ตรวจในเวลานั้นได้ตรงเวลา
+              เราขอปฎิเสธความรับผิดชอบปัญหาที่เกิดจากการนัดหมายทุกกรณี หรือ
+              การบาดเจ็บที่เกิดจากการนัดหมายไม่สำเร็จ การถูกยกเลิกนัด หรือ
+              ผลเสียหายต่างๆที่เกิดขึ้น ทั้งที่เกี่ยวข้องและไม่เกี่ยวข้อง
+              จากการใช้บริการต่างๆ นัดหมอจะไม่ทำการชี้นำคนไข้ให้เข้ารับการรักษา
+              และไม่ได้เป็นตัวแทนรับประกันคุณภาพของสถานพยาบาลใดๆ
+              จะนำเสนอข้อมูลตามกฎหมายที่ให้ให้สถานพยาบาลนำเสนอได้
+              เพื่อให้คนไข้นำไปประกอบกับข้อมูลอื่นๆในการตัดสินใจ
+
+              <br /><br />
+              นโยบายความเป็นส่วนตัว <br />
+              ผู้ที่ใช้งานเว็บไซต์ของเรา ต้องยอมรับข้อตกลง และเงื่อนไขต่าง ๆ
+              ในการใช้งาน ซึ่งท่านมีหน้าที่
+              ที่จะต้องอ่านโดยละเอียดก่อนเข้าใช้งาน การที่ท่านเข้าใช้งานเว็บไซต์
+              จะถือว่าท่านได้ยอมรับข้อตกลง และเงื่อนไขต่าง ๆ
+            </div>
+          </ion-content>
+          <ion-checkbox
+            color="primary"
+            class="ion-margin-top"
+            style="margin-right: 5px;"
+            [(ngModel)]="isChecked"
+            [ngModelOptions]="{standalone: true}"
+          ></ion-checkbox>
+          <ion-label class="ion-margin-top"
+            >ข้าพเจ้ายอมรับข้อกำหนดและเงื่อนไข</ion-label
+          >
+          <ion-row class="ion-no-padding ion-margin-top ion-padding-horizontal">
+            <ion-col size="6" class="ion-no-padding">
+              <!---Login ion-button-->
+              <ion-button
+                default-button
+                color="medium"
+                expand="block"
+                (click)="onClickCancel()"
+              >
+                ไม่ยอมรับ</ion-button
+              >
+            </ion-col>
+            <ion-col size="6" class="ion-no-padding">
+              <!---Login ion-button-->
+              <ion-button
+                default-button
+                color="success"
+                expand="block"
+                (click)="onClickConfirm()"
+                [disabled]="!isChecked"
+              >
+                ยอมรับ</ion-button
+              >
+            </ion-col>
+          </ion-row>
+        </form>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button
+        color="dark"
+        defaultHref="/tabs/account"
+      ></ion-back-button>
+    </ion-buttons>
+    <ion-title>ข้อความ</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div>
+    <ion-list>
+      <ion-item *ngFor="let msg of msgList" detail (click)="onClickMsg(msg)">
+        <ion-avatar slot="start">
+          <img [src]="msg.userImgUrl">
+        </ion-avatar>
+        <ion-label>
+          <h2>{{msg.username}}</h2>
+          <h3>{{msg.title}}</h3>
+          <p>{{msg.detail}}</p>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+  </div>
+</ion-content>

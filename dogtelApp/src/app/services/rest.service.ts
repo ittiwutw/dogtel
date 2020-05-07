@@ -160,4 +160,207 @@ export class RestService {
     });
   }
 
+  saveDog(param: any) {
+    return new Promise((resolve, reject) => {
+      const header = new HttpHeaders();
+      header.append('Content-type', 'json/data; charset=utf-8');
+
+      this.http.post(this.apiUrl + 'saveDog', param, { headers: header })
+        .subscribe(res => {
+
+          // this.setUserLogin(res);
+          resolve(res);
+        }, (err) => {
+          reject(err);
+        });
+    });
+
+  }
+
+  getDogByUserId(param: any) {
+    return new Promise((resolve, reject) => {
+      const header = new HttpHeaders();
+      header.append('Content-type', 'json/data; charset=utf-8');
+
+      this.http.post(this.apiUrl + 'getDogByUserId', param, { headers: header })
+        .subscribe(res => {
+
+          // this.setUserLogin(res);
+          resolve(res);
+        }, (err) => {
+          reject(err);
+        });
+    });
+
+  }
+
+  getHotelByUserId(param: any) {
+    return new Promise((resolve, reject) => {
+      const header = new HttpHeaders();
+      header.append('Content-type', 'json/data; charset=utf-8');
+
+      this.http.post(this.apiUrl + 'getHotelByUserId', param, { headers: header })
+        .subscribe(res => {
+
+          // this.setUserLogin(res);
+          resolve(res);
+        }, (err) => {
+          reject(err);
+        });
+    });
+
+  }
+
+  saveRoom(param: any) {
+    return new Promise((resolve, reject) => {
+      const header = new HttpHeaders();
+      header.append('Content-type', 'json/data; charset=utf-8');
+
+      this.http.post(this.apiUrl + 'saveRoom', param, { headers: header })
+        .subscribe(res => {
+
+          // this.setUserLogin(res);
+          resolve(res);
+        }, (err) => {
+          reject(err);
+        });
+    });
+
+  }
+
+  getRoomByhotelId(param: any) {
+    return new Promise((resolve, reject) => {
+      const header = new HttpHeaders();
+      header.append('Content-type', 'json/data; charset=utf-8');
+
+      this.http.post(this.apiUrl + 'getRoomByhotelId', param, { headers: header })
+        .subscribe(res => {
+
+          // this.setUserLogin(res);
+          resolve(res);
+        }, (err) => {
+          reject(err);
+        });
+    });
+
+  }
+
+  saveReview(param: any) {
+    return new Promise((resolve, reject) => {
+      const header = new HttpHeaders();
+      header.append('Content-type', 'json/data; charset=utf-8');
+
+      this.http.post(this.apiUrl + 'saveReview', param, { headers: header })
+        .subscribe(res => {
+
+          // this.setUserLogin(res);
+          resolve(res);
+        }, (err) => {
+          reject(err);
+        });
+    });
+
+  }
+
+  getReviewByhotelId(param: any) {
+    return new Promise((resolve, reject) => {
+      const header = new HttpHeaders();
+      header.append('Content-type', 'json/data; charset=utf-8');
+
+      this.http.post(this.apiUrl + 'getReviewByhotelId', param, { headers: header })
+        .subscribe(res => {
+
+          // this.setUserLogin(res);
+          resolve(res);
+        }, (err) => {
+          reject(err);
+        });
+    });
+
+  }
+
+  saveAsking(param: any) {
+    return new Promise((resolve, reject) => {
+      const header = new HttpHeaders();
+      header.append('Content-type', 'json/data; charset=utf-8');
+
+      this.http.post(this.apiUrl + 'saveAsking', param, { headers: header })
+        .subscribe(res => {
+
+          // this.setUserLogin(res);
+          resolve(res);
+        }, (err) => {
+          reject(err);
+        });
+    });
+
+  }
+
+  getAskingByHotelId(param: any) {
+    return new Promise((resolve, reject) => {
+      const header = new HttpHeaders();
+      header.append('Content-type', 'json/data; charset=utf-8');
+
+      this.http.post(this.apiUrl + 'getAskingByHotelId', param, { headers: header })
+        .subscribe(res => {
+
+          // this.setUserLogin(res);
+          resolve(res);
+        }, (err) => {
+          reject(err);
+        });
+    });
+
+  }
+
+  saveAnswer(param: any) {
+    return new Promise((resolve, reject) => {
+      const header = new HttpHeaders();
+      header.append('Content-type', 'json/data; charset=utf-8');
+
+      this.http.post(this.apiUrl + 'saveAnswer', param, { headers: header })
+        .subscribe(res => {
+
+          // this.setUserLogin(res);
+          resolve(res);
+        }, (err) => {
+          reject(err);
+        });
+    });
+
+  }
+
+  getAnswerByUserId(param: any) {
+    return new Promise((resolve, reject) => {
+      const header = new HttpHeaders();
+      header.append('Content-type', 'json/data; charset=utf-8');
+
+      this.http.post(this.apiUrl + 'getAnswerByUserId', param, { headers: header })
+        .subscribe(res => {
+
+          // this.setUserLogin(res);
+          resolve(res);
+        }, (err) => {
+          reject(err);
+        });
+    });
+
+  }
+
+  getNotification(param: any) {
+    return new Promise((resolve, reject) => {
+      const header = new HttpHeaders();
+      header.append('Content-type', 'json/data; charset=utf-8');
+
+      this.http.post(this.apiUrl + 'getNotification', param, { headers: header })
+        .subscribe(res => {
+          // this.setUserLogin(res);
+          resolve(res);
+        }, (err) => {
+          reject(err);
+        });
+    });
+
+  }
+
 }

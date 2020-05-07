@@ -1,16 +1,8 @@
-<ion-header>
-  <ion-toolbar color="primary">
-    <ion-buttons slot="start">
-      <ion-back-button color="dark" defaultHref="/tabs/tab1"></ion-back-button>
-    </ion-buttons>
-    <ion-title> </ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content>
+<ion-content style="--ion-background-color: #ecd59f;">
   <h1 class="ion-text-center">DOGTEL</h1>
   <ion-searchbar
     placeholder="ค้นหาที่บริเวณสถานที่พักที่ใกล้กับสุนัข"
+    [(ngModel)]="searchCondition.searchDistrict"
   ></ion-searchbar>
   <div>
     <ion-card>
@@ -66,32 +58,10 @@
       <ion-item>
         <ion-label>เลือกสุนัขที่ต้องการ</ion-label>
         <ion-select placeholder="เลือก" [(ngModel)]="searchCondition.dogId">
-          <ion-select-option value="1">เต้าหู้</ion-select-option>
+          <ion-select-option *ngFor="let dog of dogData" [value]="dog.id">{{dog.dogName}}</ion-select-option>
         </ion-select>
       </ion-item>
     </ion-card>
-  </div>
-  <div>
-    <ion-card>
-      <ion-item>
-        <ion-label>size</ion-label>
-      </ion-item>
-    </ion-card>
-  </div>
-  <div>
-    <ion-radio-group allow-empty-selection [(ngModel)]="searchCondition.type">
-      <ion-list-header>
-        <ion-label>เลือกแบบการดูแลที่ต้องการ</ion-label>
-      </ion-list-header>
-      <ion-item>
-        <ion-label>สถานที่</ion-label>
-        <ion-radio slot="end" color="primary" value="hotel"></ion-radio>
-      </ion-item>
-      <ion-item>
-        <ion-label>การดูแล</ion-label>
-        <ion-radio slot="end" color="primary" value="service"></ion-radio>
-      </ion-item>
-    </ion-radio-group>
   </div>
   <div class="ion-padding">
     <ion-button expand="full" (click)="onClickSearch()">ค้นหา</ion-button>

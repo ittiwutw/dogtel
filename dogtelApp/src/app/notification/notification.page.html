@@ -1,0 +1,21 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>การแจ้งเตือน</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div>
+    <ion-list>
+      <ion-item *ngFor="let notic of notificationList" >
+        <ion-avatar slot="start">
+          <img src="../../assets/icon/00_noti_1.png" *ngIf="notic.notificationFlag !== 'ยกเลิก'">
+          <img src="../../assets/icon/00_noti_2.png" *ngIf="notic.notificationFlag == 'ยกเลิก'">
+        </ion-avatar>
+        <ion-label>
+          <h2>{{notic.detail}}</h2>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+  </div>
+</ion-content>

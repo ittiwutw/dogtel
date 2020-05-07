@@ -1,0 +1,71 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button
+        color="dark"
+        defaultHref="/tabs/account"
+      ></ion-back-button>
+    </ion-buttons>
+    <ion-title></ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="ion-text-center">
+    <p>กรอกข้อมูลสุนัข</p>
+  </div>
+  <div class="ion-text-center ion-padding">
+    <img (click)="pickImage()" *ngIf="!base64Img"
+      src="../../assets/icon/add_photo.png"
+      alt=""
+      style="margin: auto; width: 60%;"
+    />
+    <img (click)="pickImage()" *ngIf="base64Img"
+      [src]="base64Img"
+      alt=""
+      style="margin: auto; width: 60%;"
+    />
+    <ion-input placeholder="ชื่อ" [(ngModel)]="dogData.dogName"></ion-input>
+  </div>
+  <div class="ion-text-center ion-padding" style="padding-top: 0px;">
+    <ion-list lines="none">
+      <ion-item>
+        <ion-radio-group value="" [(ngModel)]="dogData.sex">
+          <ion-list-header>
+            <ion-label>เพศ</ion-label>
+          </ion-list-header>
+
+          <ion-item>
+            <ion-label>ชาย</ion-label>
+            <ion-radio slot="start" value="ชาย"></ion-radio>
+          </ion-item>
+
+          <ion-item>
+            <ion-label>หญิง</ion-label>
+            <ion-radio slot="start" value="หญิง"></ion-radio>
+          </ion-item>
+        </ion-radio-group>
+      </ion-item>
+      <ion-item>
+        <ion-datetime displayFormat="DD/MM/YYYY" placeholder="วันเกิด" [(ngModel)]="dogData.birthDate" ></ion-datetime>
+      </ion-item>
+      <ion-item>
+        <ion-label>พันธุ์</ion-label>
+        <ion-select placeholder="เลือก" [(ngModel)]="dogData.species">
+          <ion-select-option value="Corgi">Corgi</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-input placeholder="สี" [(ngModel)]="dogData.color"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-textarea placeholder="จุดสังเกตุ" [(ngModel)]="dogData.detail"></ion-textarea>
+      </ion-item>
+    </ion-list>
+  </div>
+</ion-content>
+<ion-footer>
+  <ion-button expand="full" (click)="onClickSave()">
+    บันทึกข้อมูล
+  </ion-button>
+</ion-footer>

@@ -1,0 +1,86 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>เรตติ้งของฉัน</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content style="--ion-background-color: #e2e2e2;">
+  <div
+    style="background-color: #265f62; height: 200px;"
+    class="ion-text-center"
+  >
+    <img
+      style="height: 180px; width: 100%;"
+      src="/assets/icon/H_review_0.png"
+    />
+    <div
+      style="
+        margin-top: -180px;
+        font-size: 3rem;
+        margin-bottom: 60px;
+        color: #ffff;
+      "
+    >
+      <p>{{rating}}</p>
+    </div>
+    <ion-row style="margin-top: -30px;">
+      <ion-col size="12">
+        <img style="height: 20px;" src="/assets/icon/H_review_1_star.png" *ngFor="let star of stars"/>
+      </ion-col>
+    </ion-row>
+  </div>
+  <div style="background-color: #ffff;" class="ion-text-center">
+    <ion-row style="">
+      <ion-col size="4">
+        <ion-button expand="block" (click)="onClickFillterStar(0)">ทั้งหมด ({{star1 + star2 + star3 + star4 + star5}})</ion-button>
+      </ion-col>
+      <ion-col size="4">
+        <ion-button expand="block" (click)="onClickFillterStar(5)">5 ดาว ({{star5}})</ion-button>
+      </ion-col>
+      <ion-col size="4">
+        <ion-button expand="block" (click)="onClickFillterStar(4)">4 ดาว ({{star4}})</ion-button>
+      </ion-col>
+      <ion-col size="4">
+        <ion-button expand="block" (click)="onClickFillterStar(3)">3 ดาว ({{star3}})</ion-button>
+      </ion-col>
+      <ion-col size="4">
+        <ion-button expand="block" (click)="onClickFillterStar(2)">2 ดาว ({{star2}})</ion-button>
+      </ion-col>
+      <ion-col size="4">
+        <ion-button expand="block" (click)="onClickFillterStar(1)">1 ดาว ({{star1}})</ion-button>
+      </ion-col>
+    </ion-row>
+  </div>
+  <br />
+  <div style="background-color: #ffff;" class="ion-text-center ion-padding" *ngFor="let review of reviewlist">
+    <ion-row>
+      <ion-col size="2" class="ion-text-center">
+        <ion-avatar>
+          <img src="../../assets/icon/favicon.png" alt="" />
+        </ion-avatar>
+      </ion-col>
+      <ion-col size="10" class="ion-text-left">
+        <p>{{review.username}}</p>
+      </ion-col>
+      <ion-col size="2" class="ion-text-center"></ion-col>
+      <ion-col size="10" class="ion-text-left">
+        <ion-row>
+          <ion-col size="12" style="margin-top: -20px; margin-left: -5px;">
+            <img *ngFor="let start of calStar(review.star)"
+              style="width: 20px; height: 20px;"
+              src="/assets/icon/H_edithotel_2_star.png"
+            />
+          </ion-col>
+        </ion-row>
+      </ion-col>
+      <ion-col size="2" class="ion-text-center"></ion-col>
+      <ion-col size="10" class="ion-text-left" style="margin-top: -20px;">
+        <p style="color: #8a8787; font-size: 0.8rem;">{{review.review}}</p>
+      </ion-col>
+    </ion-row>
+
+    <ion-col size="12" class="ion-text-center">
+      <div style="border: 0.5px solid #e2e2e2; margin-bottom: -30px;"></div>
+    </ion-col>
+  </div>
+</ion-content>

@@ -42,6 +42,58 @@ const routes: Routes = [
   {
     path: 'fav',
     loadChildren: () => import('./fav/fav.module').then( m => m.FavPageModule)
+  },
+  {
+    path: 'comfirm-register',
+    loadChildren: () => import('./comfirm-register/comfirm-register.module').then( m => m.ComfirmRegisterPageModule)
+  },
+  {
+    path: 'terms-condition',
+    loadChildren: () => import('./terms-condition/terms-condition.module').then( m => m.TermsConditionPageModule)
+  },
+  {
+    path: 'add-dog',
+    loadChildren: () => import('./add-dog/add-dog.module').then( m => m.AddDogPageModule)
+  },
+  {
+    path: 'select-hotel-type',
+    loadChildren: () => import('./select-hotel-type/select-hotel-type.module').then( m => m.SelectHotelTypePageModule)
+  },
+  {
+    path: 'dog-detail',
+    loadChildren: () => import('./dog-detail/dog-detail.module').then( m => m.DogDetailPageModule)
+  },
+  {
+    path: 'my-hotel',
+    loadChildren: () => import('./my-hotel/my-hotel.module').then( m => m.MyHotelPageModule)
+  },
+  {
+    path: 'add-room',
+    loadChildren: () => import('./add-room/add-room.module').then( m => m.AddRoomPageModule)
+  },
+  {
+    path: 'rating',
+    loadChildren: () => import('./rating/rating.module').then( m => m.RatingPageModule)
+  },
+  {
+    path: 'review',
+    loadChildren: () => import('./review/review.module').then( m => m.ReviewPageModule)
+  },
+  {
+    path: 'asking',
+    loadChildren: () => import('./asking/asking.module').then( m => m.AskingPageModule)
+  },
+  {
+    path: 'message',
+    loadChildren: () => import('./message/message.module').then( m => m.MessagePageModule)
+  },
+  {
+    path: 'answer',
+    loadChildren: () => import('./answer/answer.module').then( m => m.AnswerPageModule)
+  },
+  {
+    path: 'notification',
+    loadChildren: () => import('./notification/notification.module').then( m => m.NotificationPageModule)
   }
 ];
 @NgModule({

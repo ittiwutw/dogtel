@@ -1,0 +1,35 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button
+        color="dark"
+        defaultHref="/tabs/tab1"
+      ></ion-back-button>
+    </ion-buttons>
+    <ion-title>ติดต่อสอบถาม</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="ion-padding">
+    <ion-list> 
+      <ion-item>
+        <ion-label >ถึง</ion-label>
+        <ion-input disabled="ture" [(ngModel)]="hotelName"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label >เรื่อง</ion-label>
+        <ion-input [(ngModel)]="asking.title"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="stacked">ข้อความ</ion-label>
+        <ion-textarea rows="5" placeholder="เขียนข้อความ" [(ngModel)]="asking.detail"></ion-textarea>
+      </ion-item>
+    </ion-list>
+  </div>
+</ion-content>
+<ion-footer>
+  <div style="background-color: #265f62;" class="ion-text-center ion-padding" (click)="onClickSave()">
+    <span style="color: #ffffff;">ส่งข้อความ</span>
+  </div>
+</ion-footer>

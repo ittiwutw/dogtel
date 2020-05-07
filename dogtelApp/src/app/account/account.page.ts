@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { RestService } from '../services/rest.service';
 import { Router } from '@angular/router';
 import { Storage } from '@ionic/storage';
-import { Events } from '@ionic/angular';
+import { Events, AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-account',
@@ -15,12 +15,14 @@ export class AccountPage implements OnInit {
   userRole: any;
   isApproveRoleReq = false;
   profile: any;
+  dogData: any;
 
   constructor(
     private restApi: RestService,
     private router: Router,
     private storage: Storage,
-    private events: Events
+    private events: Events,
+    private alertController: AlertController
   ) { }
 
   ngOnInit() {
@@ -41,17 +43,43 @@ export class AccountPage implements OnInit {
             this.changeRole();
           }
         });
+        this.loadDog();
       }
+    });
+
+
+  }
+
+  loadDog() {
+    this.storage.get('user').then((user) => {
+      const param = {
+        userId: this.profile.id,
+      };
+      this.restApi.getDogByUserId(param).then(res => {
+        let result: any;
+        result = res;
+        this.dogData = result.data.result;
+        console.log(this.dogData);
+      });
     });
   }
 
   changeRole() {
     // if (this.userRole.approveFlg === '1') {
     this.storage.remove('role').then(res => {
-      this.storage.set('role', this.userRole);
-      console.log('current role : ' + this.userRole);
-      // this.isApproveRoleReq = false;
-      this.events.publish('role:changed', this.userRole);
+      if (this.userData[1].approveFlg === '0' && this.userRole === 2) {
+        this.userRole = 1;
+        this.router.navigateByUrl('/select-hotel-type');
+      } else if (this.userData[1].approveFlg === '2' && this.userRole === 2) {
+        this.userRole = 1;
+        alert('กรุณารอการยืนยันจาก Admin');
+      } else {
+        this.storage.set('role', this.userRole);
+        console.log('current role : ' + this.userRole);
+        // this.isApproveRoleReq = false;
+        this.events.publish('role:changed', this.userRole);
+      }
+
     });
     // } else {
     //   // this.userRole = 1;
@@ -65,6 +93,50 @@ export class AccountPage implements OnInit {
     this.storage.remove('user').then(val => {
       this.router.navigate(['/login']);
     });
+  }
+
+  async presentAlertRadio() {
+    const alert = await this.alertController.create({
+      header: 'Radio',
+      inputs: [
+        {
+          name: 'radio1',
+          type: 'radio',
+          label: 'ผู้ใช้บริการ',
+          value: 1
+        },
+        {
+          name: 'radio2',
+          type: 'radio',
+          label: 'ผู้ให้บริการ',
+          value: 2
+        }
+      ],
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: () => {
+            console.log('Confirm Cancel');
+          }
+        }, {
+          text: 'Ok',
+          handler: (data) => {
+            console.log('Confirm Ok');
+            console.log(data);
+            this.userRole = data;
+            this.changeRole();
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
+
+  onClickDog(dog) {
+    this.router.navigate(['/dog-detail', { dog: JSON.stringify(dog) }]);
   }
 
 }

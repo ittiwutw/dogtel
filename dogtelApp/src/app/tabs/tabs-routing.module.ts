@@ -83,6 +83,26 @@ const routes: Routes = [
         ]
       },
       {
+        path: 'rating',
+        children: [
+          {
+            path: '',
+            loadChildren: () =>
+              import('../rating/rating.module').then(m => m.RatingPageModule)
+          }
+        ]
+      },
+      {
+        path: 'notification',
+        children: [
+          {
+            path: '',
+            loadChildren: () =>
+              import('../notification/notification.module').then(m => m.NotificationPageModule)
+          }
+        ]
+      },
+      {
         path: '',
         redirectTo: '/tabs/tab1',
         pathMatch: 'full'
