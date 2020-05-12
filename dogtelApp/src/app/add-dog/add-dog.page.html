@@ -52,7 +52,7 @@
       <ion-item>
         <ion-label>พันธุ์</ion-label>
         <ion-select placeholder="เลือก" [(ngModel)]="dogData.species">
-          <ion-select-option value="Corgi">Corgi</ion-select-option>
+          <ion-select-option *ngFor="let dog of dogMaster" [value]="dog">{{dog.dogSpecies}}</ion-select-option>
         </ion-select>
       </ion-item>
       <ion-item>

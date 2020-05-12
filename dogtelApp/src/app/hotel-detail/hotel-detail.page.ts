@@ -37,6 +37,7 @@ export class HotelDetailPage implements OnInit {
     roomId: 0,
     userHotelId: 0,
     searchDistrict: '',
+    dogSize: ''
   };
 
   constructor(
@@ -82,7 +83,8 @@ export class HotelDetailPage implements OnInit {
 
   getRooms() {
     const param = {
-      hotelId: this.hotel.id
+      hotelId: this.hotel.id,
+      dogSize: this.bookingDetail.dogSize
     };
     this.restApi.getRoomByhotelId(param).then(res => {
       let result: any;
@@ -133,7 +135,7 @@ export class HotelDetailPage implements OnInit {
     marker.setMap(this.map);
   }
 
-  onClickBook() {
+  onClickBook(roomId) {
     console.log(this.bookingDetail.startDate);
     const startDate = moment(this.bookingDetail.startDate, 'YYYY-MM-DD').toDate();
     console.log(startDate.getFullYear() + '-' + startDate.getMonth() + '-' + startDate.getDate());
@@ -158,6 +160,7 @@ export class HotelDetailPage implements OnInit {
     console.log(this.bookingDetail);
 
     this.bookingDetail.hotelId = this.hotel.id;
+    this.bookingDetail.roomId = roomId;
 
     this.storage.get('user').then((val) => {
       console.log(val);
@@ -205,7 +208,6 @@ export class HotelDetailPage implements OnInit {
   onClickAsking() {
     this.router.navigate(['/asking', { hotel: JSON.stringify(this.hotel) }]);
   }
-
 
 }
 

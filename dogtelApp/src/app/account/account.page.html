@@ -46,7 +46,7 @@
         <ion-list-header>
           บัญชีของฉัน
         </ion-list-header>
-        <ion-item detail>
+        <ion-item detail routerLink="/edit-profile">
           <ion-label>ข้อมูลส่วนตัว</ion-label>
         </ion-item>
         <div class="ion-text-left ion-padding">
@@ -84,7 +84,7 @@
       </ion-list>
 
       <ion-list *ngIf="userRole == 2">
-        <ion-item detail routerLink="/my-hotel">
+        <ion-item detail routerLink="/edit-profile">
           <ion-label>แก้ไขข้อมูลส่วนตัว</ion-label>
         </ion-item>
         <ion-item detail routerLink="/my-hotel">

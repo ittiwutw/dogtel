@@ -1,50 +1,52 @@
-<ion-content style="--ion-background-color: #ecd59f;">
-  <h1 class="ion-text-center">DOGTEL</h1>
+<ion-content style="--ion-background-color: #f1e2c0;">
+  <h1 class="ion-text-center" style="color: #695355;"><b><u>DOGTEL</u></b></h1>
+  <p class="ion-text-center" style="color: #695355;">ค้นหาสถานที่พัก</p>
   <ion-searchbar
+    style="margin-left: 20px; padding-right: 50px;"
     placeholder="ค้นหาที่บริเวณสถานที่พักที่ใกล้กับสุนัข"
     [(ngModel)]="searchCondition.searchDistrict"
   ></ion-searchbar>
   <div>
-    <ion-card>
-      <ion-row class="ion-text-center">
-        <ion-col size="4" class="ion-text-center">
-          <ion-item>
-            <ion-label>วันที่นำฝาก</ion-label>
-          </ion-item>
+    <ion-card style="background-color: #ffff;">
+      <ion-row class="ion-text-center" style="background-color: #ffff;">
+        <ion-col
+          size="4"
+          class="ion-text-center"
+          style="background-color: #ffff;"
+        >
+          <p>วันที่รับฝาก</p>
 
           <ion-datetime
             [(ngModel)]="searchCondition.startDate"
             value="2019-10-01T15:43:40.394Z"
             display-timezone="utc"
+            style="background-color: #ffff;"
           ></ion-datetime>
-        <ion-item>
-          <ion-label>เวลานำฝาก</ion-label>
-        </ion-item>
-        <ion-datetime
-          [(ngModel)]="searchCondition.startTime"
-          displayFormat="HH:mm"
-        ></ion-datetime>
+          <p>เวลานำฝาก</p>
+          <ion-datetime
+            [(ngModel)]="searchCondition.startTime"
+            displayFormat="HH:mm"
+          ></ion-datetime>
         </ion-col>
         <ion-col size="2" class="ion-text-center">
           <ion-icon
             name="arrow-forward"
-            style="margin-top: 30%;
-          font-size: 3rem;"
+            style="margin-top: 90%; font-size: 3rem;"
           ></ion-icon>
         </ion-col>
-        <ion-col size="4" class="ion-text-center">
-          <ion-item class="ion-text-center">
-            <ion-label>วันที่รับกลับ</ion-label>
-          </ion-item>
+        <ion-col
+          size="4"
+          class="ion-text-center"
+          style="background-color: #ffff;"
+        >
+          <p>วันที่รับกลับ</p>
           <ion-datetime
             [(ngModel)]="searchCondition.endDate"
             value="2019-10-01T15:43:40.394Z"
             display-timezone="utc"
           ></ion-datetime>
-          <ion-item>
-            <ion-label>เวลารับกลับ</ion-label>
-          </ion-item>
-  
+          <p>เวลารับกลับ</p>
+
           <ion-datetime
             [(ngModel)]="searchCondition.endTime"
             displayFormat="HH:mm"
@@ -54,16 +56,27 @@
     </ion-card>
   </div>
   <div>
-    <ion-card>
-      <ion-item>
+    <ion-card style="background-color: #ffff;">
+      <ion-item style="background-color: #ffff;">
         <ion-label>เลือกสุนัขที่ต้องการ</ion-label>
-        <ion-select placeholder="เลือก" [(ngModel)]="searchCondition.dogId">
-          <ion-select-option *ngFor="let dog of dogData" [value]="dog.id">{{dog.dogName}}</ion-select-option>
+        <ion-select
+          placeholder="เลือก"
+          [(ngModel)]="searchCondition.dogData"
+          style="--color: #fffff;"
+          (ionChange)="changeDog()"
+        >
+          <ion-select-option *ngFor="let dog of dogData" [value]="dog"
+            >{{dog.dogName}}</ion-select-option
+          >
         </ion-select>
       </ion-item>
     </ion-card>
   </div>
   <div class="ion-padding">
-    <ion-button expand="full" (click)="onClickSearch()">ค้นหา</ion-button>
+    <ion-button expand="full" (click)="onClickSearch()" color="tertiary"
+      >ค้นหา</ion-button
+    >
   </div>
+
+  <!-- <img src="/assets/icon/01-Book-1.png" alt="" /> -->
 </ion-content>

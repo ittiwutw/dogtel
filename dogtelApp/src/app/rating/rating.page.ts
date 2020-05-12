@@ -12,6 +12,7 @@ import { Storage } from '@ionic/storage';
 export class RatingPage implements OnInit {
   reviewlist = [];
   allReviewList = [];
+  showRate = '';
   rating = 0;
   stars = [];
   star5 = 0;
@@ -73,8 +74,10 @@ export class RatingPage implements OnInit {
       }
     });
 
-    this.rating = ((5 * this.star5) + (4 * this.star4) + (3 * this.star3) + (2 * this.star2) + (1 * this.star1)) /
-      (this.star5 + this.star4 + this.star3 + this.star2 + this.star1);
+    this.rating = (((5 * this.star5) + (4 * this.star4) + (3 * this.star3) + (2 * this.star2) + (1 * this.star1)) /
+      (this.star5 + this.star4 + this.star3 + this.star2 + this.star1));
+
+    this.showRate = this.rating.toFixed(1);
     console.log(this.rating);
 
     for (let i = 0; i < Math.ceil(this.rating); i++) {

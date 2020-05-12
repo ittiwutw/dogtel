@@ -24,6 +24,8 @@ export class SearchHotelPage implements OnInit {
     roomId: 0,
     userHotelId: 0,
     searchDistrict: '',
+    dogData: null,
+    dogSize: ''
   };
 
   dogData = [];
@@ -58,6 +60,14 @@ export class SearchHotelPage implements OnInit {
         console.log(this.dogData);
       });
     });
+  }
+
+  changeDog() {
+    console.log(this.searchCondition.dogData);
+    const selectedDog = this.searchCondition.dogData;
+    this.searchCondition.dogId = selectedDog.id;
+    this.searchCondition.dogSize = selectedDog.size;
+    console.log(this.searchCondition);
   }
 
 }

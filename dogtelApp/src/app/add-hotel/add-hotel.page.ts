@@ -36,12 +36,17 @@ export class AddHotelPage implements OnInit {
     houseNo: '',
     openTime: '',
     closeTime: '',
-    imgUrl: 'https://metropolisjapan.com/wp-content/uploads/2018/06/Wancott-playing-with-dogs.jpg',
+    imgUrl: '',
     lat: '',
     lng: '',
     idcard1: '',
     idcard2: '',
-    idcard3: ''
+    idcard3: '',
+    idcardNo1: '',
+    idcardNo2: '',
+    firstNameEng: '',
+    lastNameEng: '',
+    birthDate: '',
   };
 
   constructor(
@@ -56,7 +61,7 @@ export class AddHotelPage implements OnInit {
   }
 
   ionViewDidEnter() {
-    this.loadMap();
+    // this.loadMap();
   }
 
   loadMap() {
@@ -101,6 +106,9 @@ export class AddHotelPage implements OnInit {
 
   onClickNextStep() {
     this.currentStep++;
+    if (this.currentStep === 3) {
+      this.loadMap();
+    }
     console.log(this.currentStep);
   }
 
@@ -111,7 +119,7 @@ export class AddHotelPage implements OnInit {
 
   onClickSave() {
     this.storage.get('user').then((user) => {
-      this.hotel.userId = user.id;
+      this.hotel.userId = user[0].id;
       this.restApi.saveHotel(this.hotel).then(res => {
         console.log(res);
         this.currentStep++;

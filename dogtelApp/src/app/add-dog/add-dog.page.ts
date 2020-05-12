@@ -21,8 +21,10 @@ export class AddDogPage implements OnInit {
     color: '',
     detail: '',
     dogImgUrl: '',
+    size: ''
   };
   base64Img: any;
+  dogMaster = [];
 
   constructor(
     private router: Router,
@@ -32,9 +34,27 @@ export class AddDogPage implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.loadDogMaster();
+  }
+
+  loadDogMaster() {
+    this.restApi.getDogMaster().then(res => {
+      console.log(res);
+      let result: any;
+      result = res;
+
+      this.dogMaster = result.data.result;
+      console.log(this.dogMaster);
+    });
   }
 
   onClickSave() {
+    let selectedDog: any;
+    selectedDog = this.dogData.species;
+
+    this.dogData.species = selectedDog.dogSpecies;
+    this.dogData.size = selectedDog.dogSize;
+    console.log(this.dogData);
     this.storage.get('user').then((user) => {
       this.dogData.userId = user[0].id;
       this.restApi.saveDog(this.dogData).then(res => {

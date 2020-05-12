@@ -1,13 +1,32 @@
-<ion-content>
-  <div padding>
-    <ion-row>
-      <ion-col size="6" *ngFor="let hotel of favs; let i = index">
-        <ion-card class="ion-text-center" (click)="onClickHotel(hotel)">
-          <img [src]="hotel.imgUrl" alt="" style="height: 150px;" />
-          <p><b>{{hotel.name}}</b></p>
-          <ion-button (click)="remove(i)" color="danger">เลิกถูกใจ</ion-button>
-        </ion-card>
-      </ion-col>
-    </ion-row>
+<ion-content style="--ion-background-color: #e2e2e2;">
+  <div>
+    <ion-card
+      *ngFor="let result of favs; let i = index"
+      (click)="onClickHotel(result)"
+      style="background-color: #ffff;"
+    >
+      <img [src]="result.imgUrl" alt="" />
+      <div class="ion-padding">
+        <ion-row>
+          <ion-col size="8" class="ion-text-left">
+            <span style="font-size: 2rem; padding-left: 5px;">{{result.name}}</span>
+          </ion-col>
+          <ion-col size="4" class="ion-text-right">
+            <img src="../../assets/icon/00_like.png" alt="" style="width: 40%;" (click)="remove(i)"/>
+            <!-- <ion-icon name="heart" style="font-size: 3rem;" color="dark" *ngIf="!isAddedFav" (click)="onClickFav()"></ion-icon> -->
+            <!-- <ion-icon name="heart" style="font-size: 3rem;" color="success" *ngIf="isAddedFav"></ion-icon> -->
+          </ion-col>
+          <ion-col size="12" class="ion-text-center">
+            <div style="border: 0.5px solid #e2e2e2; margin-bottom: -30px;"></div>
+          </ion-col>
+          <ion-col size="6">
+            <p>ดูเพิ่มเติม...</p>
+          </ion-col>
+          <ion-col size="6" class="ion-text-right">
+            <p style="color: #ff0000;">ราคาขั้นต่ำสุด ฿200</p>
+          </ion-col>
+        </ion-row>
+      </div>
+    </ion-card>
   </div>
 </ion-content>
