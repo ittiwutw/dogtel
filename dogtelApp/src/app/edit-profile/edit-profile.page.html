@@ -1,34 +1,105 @@
 <ion-header>
   <ion-toolbar color="primary">
     <ion-buttons slot="start">
-      <ion-back-button color="light" defaultHref="/tabs/account"></ion-back-button>
+      <ion-back-button
+        color="light"
+        defaultHref="/tabs/account"
+      ></ion-back-button>
     </ion-buttons>
     <ion-title> </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content style="--ion-background-color: #ecd59f;">
-  <ion-card class="welcome-card">
+<ion-content>
+  <div style="background-color: #ecd59f;" class="ion-center">
+    <img
+      (click)="pickImage()"
+      *ngIf="!userImgUrl"
+      src="../../assets/icon/add_photo.png"
+      alt=""
+      style="margin: auto; width: 60%;    margin-left: 20%;"
+    />
+    <img
+      (click)="pickImage()"
+      *ngIf="userImgUrl"
+      [src]="userImgUrl"
+      alt=""
+      style="margin: auto; width: 60%;"
+    />
+  </div>
+  <ion-list>
+    <ion-item>
+      <ion-label position="floating" type="text" style="color: #695355;"
+        >USERNAME</ion-label
+      >
+      <ion-input [(ngModel)]="username" disabled="true"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating" type="text" style="color: #695355;"
+        >E-MAIL</ion-label
+      >
+      <ion-input [(ngModel)]="email"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating" type="text" style="color: #695355;"
+        >เบอร์โทรศัพท์</ion-label
+      >
+      <ion-input [(ngModel)]="tel" type="number"></ion-input>
+    </ion-item>
+  </ion-list>
+  <!-- <ion-card class="welcome-card">
     <ion-card-header>
-      <ion-card-title text-center style="color: #695355;">ลงทะเบียน</ion-card-title>
+      <ion-card-title text-center style="color: #695355;"
+        >แก้ไขข้อมูล</ion-card-title
+      >
     </ion-card-header>
+    <div class="ion-text-center ion-padding">
+      <img
+        (click)="pickImage()"
+        *ngIf="!base64Img"
+        src="../../assets/icon/add_photo.png"
+        alt=""
+        style="margin: auto; width: 60%;"
+      />
+      <img
+        (click)="pickImage()"
+        *ngIf="base64Img"
+        [src]="base64Img"
+        alt=""
+        style="margin: auto; width: 60%;"
+      />
+    </div>
     <ion-card-content>
       <ion-item>
-        <ion-label position="floating" type="text" style="color: #695355;">USERNAME</ion-label>
+        <ion-label position="floating" type="text" style="color: #695355;"
+          >USERNAME</ion-label
+        >
         <ion-input [(ngModel)]="username" disabled="true"></ion-input>
       </ion-item>
       <ion-item>
-        <ion-label position="floating" type="text" style="color: #695355;">E-MAIL</ion-label>
+        <ion-label position="floating" type="text" style="color: #695355;"
+          >E-MAIL</ion-label
+        >
         <ion-input [(ngModel)]="email"></ion-input>
       </ion-item>
+      <ion-item>
+        <ion-label position="floating" type="text" style="color: #695355;"
+          >เบอร์โทรศัพท์</ion-label
+        >
+        <ion-input [(ngModel)]="tel" type="number"></ion-input>
+      </ion-item>
     </ion-card-content>
-    <img style="height: 150px; width: 150px; margin: auto;" src="/assets/icon/00_profile_dog_0.png" />
-
-    <!-- Default Input " -->
-  </ion-card>
-</ion-content>
+    <img
+      style="height: 150px; width: 150px; margin: auto;"
+      src="/assets/icon/00_profile_dog_0.png"
+    />
+</ion-card> --></ion-content>
 <ion-footer>
-  <div style="background-color: #265f62;" class="ion-text-center ion-padding" (click)="onClickSave()">
+  <div
+    style="background-color: #265f62;"
+    class="ion-text-center ion-padding"
+    (click)="onClickSave()"
+  >
     <span style="color: #ffffff;">บันทึกการแก้ไขข้อมูล</span>
   </div>
 </ion-footer>

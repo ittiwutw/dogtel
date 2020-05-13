@@ -18,9 +18,9 @@
 
           <ion-datetime
             [(ngModel)]="searchCondition.startDate"
-            value="2019-10-01T15:43:40.394Z"
             display-timezone="utc"
             style="background-color: #ffff;"
+            [min]="minDate"
           ></ion-datetime>
           <p>เวลานำฝาก</p>
           <ion-datetime
@@ -44,6 +44,7 @@
             [(ngModel)]="searchCondition.endDate"
             value="2019-10-01T15:43:40.394Z"
             display-timezone="utc"
+            [min]="searchCondition.startDate"
           ></ion-datetime>
           <p>เวลารับกลับ</p>
 

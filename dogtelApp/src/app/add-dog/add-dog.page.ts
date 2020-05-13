@@ -21,7 +21,9 @@ export class AddDogPage implements OnInit {
     color: '',
     detail: '',
     dogImgUrl: '',
-    size: ''
+    dogSize: '',
+    vaccine: '',
+    habit: ''
   };
   base64Img: any;
   dogMaster = [];
@@ -49,20 +51,41 @@ export class AddDogPage implements OnInit {
   }
 
   onClickSave() {
-    let selectedDog: any;
-    selectedDog = this.dogData.species;
+    if (this.validate()) {
+      let selectedDog: any;
+      selectedDog = this.dogData.species;
 
-    this.dogData.species = selectedDog.dogSpecies;
-    this.dogData.size = selectedDog.dogSize;
-    console.log(this.dogData);
-    this.storage.get('user').then((user) => {
-      this.dogData.userId = user[0].id;
-      this.restApi.saveDog(this.dogData).then(res => {
-        console.log(res);
-        alert('บันทึกข้อมูลสำเร็จ');
-        this.router.navigateByUrl('/tabs/account');
+      this.dogData.species = selectedDog.dogSpecies;
+      this.dogData.dogSize = selectedDog.dogSize;
+      console.log(this.dogData);
+      this.storage.get('user').then((user) => {
+        this.dogData.userId = user[0].id;
+        this.restApi.saveDog(this.dogData).then(res => {
+          console.log(res);
+          alert('บันทึกข้อมูลสำเร็จ');
+          this.router.navigateByUrl('/tabs/account');
+        });
       });
-    });
+    }
+  }
+
+  validate() {
+    let isValidate = false;
+    if (this.dogData.sex === ''
+      || this.dogData.birthDate === ''
+      || this.dogData.dogName === ''
+      || this.dogData.birthDate === ''
+      || this.dogData.vaccine === ''
+      || this.dogData.species === ''
+      || this.dogData.color === ''
+      || this.dogData.detail === ''
+      || this.dogData.habit === ''
+      || this.dogData.dogImgUrl === '') {
+      alert('กรุณากรอกข้อมูลให้ครบถ้วน');
+    } else {
+      isValidate = true;
+    }
+    return isValidate;
   }
 
   pickImage() {

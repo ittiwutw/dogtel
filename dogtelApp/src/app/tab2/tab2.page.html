@@ -1,7 +1,16 @@
+<ion-header>
+  <ion-toolbar >
+    <ion-title>สถานะการจอง </ion-title>
+  </ion-toolbar>
+</ion-header>
 <ion-content>
-  <h1 class="ion-text-center">สถานะการจอง</h1>
+  <!-- <h1 class="ion-text-center">สถานะการจอง</h1> -->
   <!-- Label only -->
-  <ion-segment (ionChange)="segmentChanged($event)" value="booking" *ngIf="role == 'CUSTOMER' ">
+  <ion-segment
+    (ionChange)="segmentChanged($event)"
+    value="booking"
+    *ngIf="role == 'CUSTOMER' "
+  >
     <ion-segment-button value="booking">
       <ion-label>การจอง</ion-label>
     </ion-segment-button>
@@ -13,7 +22,11 @@
     </ion-segment-button>
   </ion-segment>
 
-  <ion-segment (ionChange)="segmentChanged($event)" value="hotelBooking" *ngIf="role == 'HOTEL' ">
+  <ion-segment
+    (ionChange)="segmentChanged($event)"
+    value="hotelBooking"
+    *ngIf="role == 'HOTEL' "
+  >
     <ion-segment-button value="hotelBooking">
       <ion-label>การจอง</ion-label>
     </ion-segment-button>
@@ -34,9 +47,7 @@
         <ion-col size="12">
           <ion-item>
             <ion-thumbnail slot="start">
-              <img
-                [src]="booking.imgUrl"
-              />
+              <img [src]="booking.imgUrl" />
             </ion-thumbnail>
             <ion-label>{{booking.name}}</ion-label>
           </ion-item>
@@ -44,7 +55,13 @@
         <ion-col size="12">
           <ion-row>
             <ion-col size="5" class="ion-text-right">
-              <p>วันนำฝาก <br />{{booking.startDate | date: 'dd/MM/yyyy'}}</p>
+              <p>
+                วันนำฝาก <br />{{booking.startDate | date: 'dd/MM/yyyy'}}
+                <br />
+                เวลา
+                <br />
+                {{booking.startTime}}
+              </p>
             </ion-col>
             <ion-col size="2" class="ion-text-center">
               <ion-icon
@@ -53,7 +70,13 @@
               ></ion-icon>
             </ion-col>
             <ion-col size="5" class="ion-text-left">
-              <p>วันรับกลับ <br />{{booking.endDate | date: 'dd/MM/yyyy'}}</p>
+              <p>
+                วันรับกลับ <br />{{booking.endDate | date: 'dd/MM/yyyy'}}
+                <br />
+                เวลา
+                <br />
+                {{booking.endTime}}
+              </p>
             </ion-col>
           </ion-row>
         </ion-col>
@@ -78,13 +101,26 @@
           </ion-row>
         </ion-col>
         <ion-col size="12" *ngIf="booking.status != 'รอการยืนยัน'">
-          <ion-button expand="block" color="success" (click)="payBooking(booking)" [disabled]="booking.paymentStatus == 'ชำระเงินแล้ว'">ชำระเงิน</ion-button>
+          <ion-button
+            expand="block"
+            color="success"
+            (click)="payBooking(booking)"
+            [disabled]="booking.paymentStatus == 'ชำระเงินแล้ว'"
+            >ชำระเงิน</ion-button
+          >
         </ion-col>
         <ion-col size="12">
-          <ion-button expand="block" color="danger" (click)="cancelBooking(booking)">ยกเลิกการจอง</ion-button>
+          <ion-button
+            expand="block"
+            color="danger"
+            (click)="cancelBooking(booking)"
+            >ยกเลิกการจอง</ion-button
+          >
         </ion-col>
         <ion-col size="12">
-          <ion-button expand="block" (click)="onClickAsking(booking)">ติดต่อผู้ให้บริการ</ion-button>
+          <ion-button expand="block" (click)="onClickAsking(booking)"
+            >ติดต่อผู้ให้บริการ</ion-button
+          >
         </ion-col>
       </ion-row>
     </ion-card>
@@ -96,9 +132,7 @@
         <ion-col size="12">
           <ion-item>
             <ion-thumbnail slot="start">
-              <img
-                [src]="booking.imgUrl"
-              />
+              <img [src]="booking.imgUrl" />
             </ion-thumbnail>
             <ion-label>{{booking.name}}</ion-label>
           </ion-item>
@@ -106,7 +140,13 @@
         <ion-col size="12">
           <ion-row>
             <ion-col size="5" class="ion-text-right">
-              <p>วันนำฝาก <br />{{booking.startDate | date: 'dd/MM/yyyy'}}</p>
+              <p>
+                วันนำฝาก <br />{{booking.startDate | date: 'dd/MM/yyyy'}}
+                <br />
+                เวลา
+                <br />
+                {{booking.startTime}}
+              </p>
             </ion-col>
             <ion-col size="2" class="ion-text-center">
               <ion-icon
@@ -115,7 +155,13 @@
               ></ion-icon>
             </ion-col>
             <ion-col size="5" class="ion-text-left">
-              <p>วันรับกลับ <br />{{booking.endDate | date: 'dd/MM/yyyy'}}</p>
+              <p>
+                วันรับกลับ <br />{{booking.endDate | date: 'dd/MM/yyyy'}}
+                <br />
+                เวลา
+                <br />
+                {{booking.endTime}}
+              </p>
             </ion-col>
           </ion-row>
         </ion-col>
@@ -130,7 +176,9 @@
           </ion-row>
         </ion-col>
         <ion-col size="12">
-          <ion-button expand="block" (click)="onClickReview(booking)">รีวิว</ion-button>
+          <ion-button expand="block" (click)="onClickReview(booking)"
+            >รีวิว</ion-button
+          >
         </ion-col>
       </ion-row>
     </ion-card>
@@ -142,9 +190,7 @@
         <ion-col size="12">
           <ion-item>
             <ion-thumbnail slot="start">
-              <img
-                [src]="booking.imgUrl"
-              />
+              <img [src]="booking.imgUrl" />
             </ion-thumbnail>
             <ion-label>{{booking.name}}</ion-label>
           </ion-item>
@@ -152,7 +198,13 @@
         <ion-col size="12">
           <ion-row>
             <ion-col size="5" class="ion-text-right">
-              <p>วันนำฝาก <br />{{booking.startDate | date: 'dd/MM/yyyy'}}</p>
+              <p>
+                วันนำฝาก <br />{{booking.startDate | date: 'dd/MM/yyyy'}}
+                <br />
+                เวลา
+                <br />
+                {{booking.startTime}}
+              </p>
             </ion-col>
             <ion-col size="2" class="ion-text-center">
               <ion-icon
@@ -161,7 +213,13 @@
               ></ion-icon>
             </ion-col>
             <ion-col size="5" class="ion-text-left">
-              <p>วันรับกลับ <br />{{booking.endDate | date: 'dd/MM/yyyy'}}</p>
+              <p>
+                วันรับกลับ <br />{{booking.endDate | date: 'dd/MM/yyyy'}}
+                <br />
+                เวลา
+                <br />
+                {{booking.endTime}}
+              </p>
             </ion-col>
           </ion-row>
         </ion-col>
@@ -176,7 +234,9 @@
           </ion-row>
         </ion-col>
         <ion-col size="12">
-          <ion-button expand="block" (click)="onClickAsking(booking)">ติดต่อผู้ให้บริการ</ion-button>
+          <ion-button expand="block" (click)="onClickAsking(booking)"
+            >ติดต่อผู้ให้บริการ</ion-button
+          >
         </ion-col>
       </ion-row>
     </ion-card>
@@ -188,9 +248,7 @@
         <ion-col size="12">
           <ion-item>
             <ion-thumbnail slot="start">
-              <img
-                [src]="booking.imgUrl"
-              />
+              <img [src]="booking.imgUrl" />
             </ion-thumbnail>
             <ion-label>{{booking.name}}</ion-label>
           </ion-item>
@@ -198,7 +256,13 @@
         <ion-col size="12">
           <ion-row>
             <ion-col size="5" class="ion-text-right">
-              <p>วันนำฝาก <br />{{booking.startDate | date: 'dd/MM/yyyy'}}</p>
+              <p>
+                วันนำฝาก <br />{{booking.startDate | date: 'dd/MM/yyyy'}}
+                <br />
+                เวลา
+                <br />
+                {{booking.startTime}}
+              </p>
             </ion-col>
             <ion-col size="2" class="ion-text-center">
               <ion-icon
@@ -207,7 +271,13 @@
               ></ion-icon>
             </ion-col>
             <ion-col size="5" class="ion-text-left">
-              <p>วันรับกลับ <br />{{booking.endDate | date: 'dd/MM/yyyy'}}</p>
+              <p>
+                วันรับกลับ <br />{{booking.endDate | date: 'dd/MM/yyyy'}}
+                <br />
+                เวลา
+                <br />
+                {{booking.endTime}}
+              </p>
             </ion-col>
           </ion-row>
         </ion-col>
@@ -222,13 +292,25 @@
           </ion-row>
         </ion-col>
         <ion-col size="6">
-          <ion-button expand="block" color="danger" (click)="hotelCancel(booking)">ยกเลิก</ion-button>
+          <ion-button
+            expand="block"
+            color="danger"
+            (click)="hotelCancel(booking)"
+            >ยกเลิก</ion-button
+          >
         </ion-col>
-        <ion-col size="6" >
-          <ion-button expand="block" color="success" (click)="hotelConfirm(booking)" >ยอมรับ</ion-button>
+        <ion-col size="6">
+          <ion-button
+            expand="block"
+            color="success"
+            (click)="hotelConfirm(booking)"
+            >ยอมรับ</ion-button
+          >
         </ion-col>
         <ion-col size="12">
-          <ion-button expand="block" (click)="onClickAsking(booking)">ติดต่อผู้จอง</ion-button>
+          <ion-button expand="block" (click)="onClickAsking(booking)"
+            >ติดต่อผู้จอง</ion-button
+          >
         </ion-col>
       </ion-row>
     </ion-card>
@@ -240,9 +322,7 @@
         <ion-col size="12">
           <ion-item>
             <ion-thumbnail slot="start">
-              <img
-                [src]="booking.imgUrl"
-              />
+              <img [src]="booking.imgUrl" />
             </ion-thumbnail>
             <ion-label>{{booking.name}}</ion-label>
           </ion-item>
@@ -250,7 +330,13 @@
         <ion-col size="12">
           <ion-row>
             <ion-col size="5" class="ion-text-right">
-              <p>วันนำฝาก <br />{{booking.startDate | date: 'dd/MM/yyyy'}}</p>
+              <p>
+                วันนำฝาก <br />{{booking.startDate | date: 'dd/MM/yyyy'}}
+                <br />
+                เวลา
+                <br />
+                {{booking.startTime}}
+              </p>
             </ion-col>
             <ion-col size="2" class="ion-text-center">
               <ion-icon
@@ -259,7 +345,13 @@
               ></ion-icon>
             </ion-col>
             <ion-col size="5" class="ion-text-left">
-              <p>วันรับกลับ <br />{{booking.endDate | date: 'dd/MM/yyyy'}}</p>
+              <p>
+                วันรับกลับ <br />{{booking.endDate | date: 'dd/MM/yyyy'}}
+                <br />
+                เวลา
+                <br />
+                {{booking.endTime}}
+              </p>
             </ion-col>
           </ion-row>
         </ion-col>
@@ -284,10 +376,20 @@
           </ion-row>
         </ion-col>
         <ion-col size="6">
-          <ion-button expand="block" color="danger" (click)="hotelCancel(booking)">ยกเลิก</ion-button>
+          <ion-button
+            expand="block"
+            color="danger"
+            (click)="hotelCancel(booking)"
+            >ยกเลิก</ion-button
+          >
         </ion-col>
-        <ion-col size="6" >
-          <ion-button expand="block" color="success" (click)="hotelFinish(booking)" >ลูกค้ารับกลับแล้ว</ion-button>
+        <ion-col size="6">
+          <ion-button
+            expand="block"
+            color="success"
+            (click)="hotelFinish(booking)"
+            >ลูกค้ารับกลับแล้ว</ion-button
+          >
         </ion-col>
         <ion-col size="12">
           <ion-button expand="block">ติดต่อผู้จอง</ion-button>
@@ -302,9 +404,7 @@
         <ion-col size="12">
           <ion-item>
             <ion-thumbnail slot="start">
-              <img
-                [src]="booking.imgUrl"
-              />
+              <img [src]="booking.imgUrl" />
             </ion-thumbnail>
             <ion-label>{{booking.name}}</ion-label>
           </ion-item>
@@ -312,7 +412,13 @@
         <ion-col size="12">
           <ion-row>
             <ion-col size="5" class="ion-text-right">
-              <p>วันนำฝาก <br />{{booking.startDate | date: 'dd/MM/yyyy'}}</p>
+              <p>
+                วันนำฝาก <br />{{booking.startDate | date: 'dd/MM/yyyy'}}
+                <br />
+                เวลา
+                <br />
+                {{booking.startTime}}
+              </p>
             </ion-col>
             <ion-col size="2" class="ion-text-center">
               <ion-icon
@@ -321,7 +427,13 @@
               ></ion-icon>
             </ion-col>
             <ion-col size="5" class="ion-text-left">
-              <p>วันรับกลับ <br />{{booking.endDate | date: 'dd/MM/yyyy'}}</p>
+              <p>
+                วันรับกลับ <br />{{booking.endDate | date: 'dd/MM/yyyy'}}
+                <br />
+                เวลา
+                <br />
+                {{booking.endTime}}
+              </p>
             </ion-col>
           </ion-row>
         </ion-col>
@@ -345,9 +457,7 @@
         <ion-col size="12">
           <ion-item>
             <ion-thumbnail slot="start">
-              <img
-                [src]="booking.imgUrl"
-              />
+              <img [src]="booking.imgUrl" />
             </ion-thumbnail>
             <ion-label>{{booking.name}}</ion-label>
           </ion-item>
@@ -355,7 +465,13 @@
         <ion-col size="12">
           <ion-row>
             <ion-col size="5" class="ion-text-right">
-              <p>วันนำฝาก <br />{{booking.startDate | date: 'dd/MM/yyyy'}}</p>
+              <p>
+                วันนำฝาก <br />{{booking.startDate | date: 'dd/MM/yyyy'}}
+                <br />
+                เวลา
+                <br />
+                {{booking.startTime}}
+              </p>
             </ion-col>
             <ion-col size="2" class="ion-text-center">
               <ion-icon
@@ -364,7 +480,13 @@
               ></ion-icon>
             </ion-col>
             <ion-col size="5" class="ion-text-left">
-              <p>วันรับกลับ <br />{{booking.endDate | date: 'dd/MM/yyyy'}}</p>
+              <p>
+                วันรับกลับ <br />{{booking.endDate | date: 'dd/MM/yyyy'}}
+                <br />
+                เวลา
+                <br />
+                {{booking.endTime}}
+              </p>
             </ion-col>
           </ion-row>
         </ion-col>

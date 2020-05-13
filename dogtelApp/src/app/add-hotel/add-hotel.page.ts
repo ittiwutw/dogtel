@@ -21,6 +21,13 @@ export class AddHotelPage implements OnInit {
   base64ImgHotelImg: any;
 
   currentStep = 1;
+  acceptCheckbox = false;
+  other = false;
+  type1 = false;
+  type2 = false;
+  type3 = false;
+  type4 = false;
+  otherDesc = '';
 
   hotel = {
     userId: 0,
@@ -105,7 +112,103 @@ export class AddHotelPage implements OnInit {
   }
 
   onClickNextStep() {
-    this.currentStep++;
+    // this.currentStep++;
+
+    if (this.currentStep === 6) {
+      if (this.hotel.imgUrl === '') {
+        alert('กรุณาอัพโหลดรูปภาพ');
+      } else {
+        this.currentStep++;
+      }
+    }
+
+    if (this.currentStep === 5) {
+      if (!this.type1) {
+        if (!this.type2) {
+          if (!this.type3) {
+            if (!this.type4) {
+              if (!this.other) {
+                if (this.otherDesc === '') {
+                  alert('กรุณากรอกข้อมูลให้ครบถ้วน');
+                } else {
+                  this.currentStep++;
+                }
+              } else {
+                if (this.otherDesc === '') {
+                  alert('กรุณากรอกข้อมูลให้ครบถ้วน');
+                } else {
+                  this.currentStep++;
+                }
+              }
+            } else {
+              this.currentStep++;
+            }
+          } else {
+            this.currentStep++;
+          }
+        } else {
+          this.currentStep++;
+        }
+
+      } else {
+        this.currentStep++;
+      }
+    }
+
+    if (this.currentStep === 4) {
+      if (this.hotel.name === ''
+        || this.hotel.firstName === ''
+        || this.hotel.lastName === ''
+        || this.hotel.registerNo === ''
+        || this.hotel.openTime === ''
+        || this.hotel.closeTime === '') {
+        alert('กรุณากรอกข้อมูลให้ครบถ้วน');
+      } else {
+        this.currentStep++;
+      }
+    }
+
+    if (this.currentStep === 3) {
+      if (this.hotel.province === ''
+        || this.hotel.district === ''
+        || this.hotel.subDistrict === ''
+        || this.hotel.postalCode === ''
+        || this.hotel.houseNo === ''
+        || this.hotel.lat === ''
+        || this.hotel.lng === '') {
+        alert('กรุณากรอกข้อมูลให้ครบถ้วน');
+      } else {
+        this.currentStep++;
+      }
+    }
+
+    if (this.currentStep === 2) {
+      if (this.hotel.idcard1 === ''
+        || this.hotel.idcard2 === ''
+        || this.hotel.idcard3 === '') {
+        alert('กรุณาอัพโหลดรูปภาพให้ครบ');
+      } else {
+        this.currentStep++;
+      }
+    }
+
+    if (this.currentStep === 1) {
+      if ((this.hotel.idcardNo1 === '' || this.hotel.idcardNo1.length < 13 || this.hotel.idcardNo1.length > 13)) {
+        alert('กรุณาใส่เลขบัตรประชาชนให้ถูกต้อง');
+      } else if (this.hotel.idcardNo2 === ''
+        || this.hotel.idcardNo2 === ''
+        || this.hotel.firstName === ''
+        || this.hotel.lastName === ''
+        || this.hotel.firstNameEng === ''
+        || this.hotel.lastNameEng === ''
+        || this.hotel.birthDate === ''
+        || this.hotel.postalCode === '') {
+        alert('กรุณากรอกข้อมูลให้ครบถ้วน');
+      } else {
+        this.currentStep++;
+      }
+
+    }
     if (this.currentStep === 3) {
       this.loadMap();
     }

@@ -22,7 +22,8 @@ export class AddRoomPage implements OnInit {
     sizeHeight: '',
     price: '',
     hotelId: 0,
-    roomImgUrl: ''
+    roomImgUrl: '',
+    dogSize: 0
   };
 
   constructor(
@@ -66,11 +67,32 @@ export class AddRoomPage implements OnInit {
   }
 
   onClickSave() {
-    this.restApi.saveRoom(this.roomData).then(res => {
-      console.log(res);
-      alert('บันทึกข้อมูลสำเร็จ');
-      this.router.navigateByUrl('/tabs/account');
-    });
+    if (this.validate()) {
+      this.restApi.saveRoom(this.roomData).then(res => {
+        console.log(res);
+        alert('บันทึกข้อมูลสำเร็จ');
+        this.router.navigateByUrl('/tabs/account');
+      });
+    }
+  }
+
+  validate() {
+    let isValidate = false;
+
+    if (this.roomData.roomName === ''
+      || this.roomData.dogSize === 0
+      || this.roomData.detail === ''
+      || this.roomData.sizeLength === ''
+      || this.roomData.sizeWidth === ''
+      || this.roomData.sizeHeight === ''
+      || this.roomData.price === ''
+      || this.roomData.roomImgUrl === '') {
+      alert('กรุณาใส่ข้อมูลให้ครบถ้วน');
+    } else {
+      isValidate = true;
+    }
+
+    return isValidate;
   }
 
 }

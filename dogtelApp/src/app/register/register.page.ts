@@ -52,6 +52,10 @@ export class RegisterPage implements OnInit {
       if (this.password.match(this.confirmPassword) === null) {
         this.passwordNotMatch = true;
         alert('Password Not Match');
+      } else if (!this.validateEmail(this.email)) {
+        alert('กรุณากรอก E-mail ให้ถูกต้อง');
+      } else if (this.password.length < 8 || this.password.length > 18) {
+        alert('กรุณากรอก password มากกว่า 8 ตัว หรือ น้อยกว่า 18 ตัว');
       } else {
         isValidate = true;
       }
@@ -62,6 +66,11 @@ export class RegisterPage implements OnInit {
     console.log(isValidate);
 
     return isValidate;
+  }
+
+  validateEmail(email) {
+    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(String(email).toLowerCase());
   }
 
 }

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { RestService } from '../services/rest.service';
 import { Router } from '@angular/router';
+import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 
 @Component({
   selector: 'app-tab1',
@@ -9,7 +10,7 @@ import { Router } from '@angular/router';
 })
 export class Tab1Page {
   slideOpts = {
-    slidesPerView: 1.5,
+    slidesPerView: 1.2,
     coverflowEffect: {
       rotate: 50,
       stretch: 0,
@@ -21,11 +22,12 @@ export class Tab1Page {
     autoplay: true
   };
 
-  hotels: any;
+  hotels = [];
 
   constructor(
     private restApi: RestService,
-    private router: Router
+    private router: Router,
+    private iab: InAppBrowser
   ) {
     this.getHotelList();
   }
@@ -39,7 +41,15 @@ export class Tab1Page {
       const getResults = data.data;
       if (getResults) {
         console.log(getResults.result);
-        this.hotels = getResults.result;
+
+        let i = 0;
+        getResults.result.forEach(hotel => {
+          if (i < 5) {
+            this.hotels.push(hotel);
+          }
+          i++;
+        });
+        // this.hotels = getResults.result;
         // const userInfo = userData.result[0];
 
       } else {
@@ -54,6 +64,10 @@ export class Tab1Page {
 
   onClickSearch() {
     this.router.navigate(['tabs/tab1/search-hotel']);
+  }
+
+  openLink(link) {
+    this.iab.create(link, '_system');
   }
 
 }

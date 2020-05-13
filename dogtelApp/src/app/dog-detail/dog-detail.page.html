@@ -1,5 +1,11 @@
 <ion-content style="--ion-background-color: #ecd59f;">
-  <img src="../../assets/icon/dog_close.png" alt="" style="width: 20%;" class="ion-padding" routerLink="/tabs/account"/>
+  <img
+    src="../../assets/icon/dog_close.png"
+    alt=""
+    style="width: 20%;"
+    class="ion-padding"
+    routerLink="/tabs/account"
+  />
   <div class="ion-text-center ion-padding">
     <ion-avatar style="margin: auto; width: 200px; height: 200px;">
       <img [src]="dogData.dogImgUrl" alt="" />
@@ -24,9 +30,15 @@
             <p><b>จุดสังเกตุ</b></p>
           </ion-col>
           <ion-col size="12" class="ion-text-center">
-            <div style="border: 0.5px solid #000000; margin-left: 30px; margin-right: 30px;"></div>
+            <div
+              style="
+                border: 0.5px solid #000000;
+                margin-left: 30px;
+                margin-right: 30px;
+              "
+            ></div>
           </ion-col>
-          
+
           <ion-col size="12" class="ion-text-center">
             <p>{{dogData.detail}}</p>
           </ion-col>
@@ -40,29 +52,38 @@
             <p style="margin-left: 30px;"><b>ข้อมูลทั่วไป</b></p>
           </ion-col>
           <ion-col size="12" class="ion-text-center">
-            <div style="border: 0.5px solid #000000; margin-left: 30px; margin-right: 30px;"></div>
+            <div
+              style="
+                border: 0.5px solid #000000;
+                margin-left: 30px;
+                margin-right: 30px;
+              "
+            ></div>
           </ion-col>
-          
+
           <ion-col size="6" class="ion-text-center">
             <p>วันเดือนปีเกิด</p>
           </ion-col>
           <ion-col size="6" class="ion-text-center">
-            <p style="color: #f39b2e;"><b>{{dogData.birthDate}}</b></p>
+            <p style="color: #f39b2e;"><b>{{dogData.birthDate | date : 'dd/MM/yyyy'}}</b></p>
           </ion-col>
           <ion-col size="6" class="ion-text-center">
             <p>ฉีดวัคซีนล่าสุด</p>
           </ion-col>
           <ion-col size="6" class="ion-text-center">
-            <p style="color: #f39b2e;"><b>{{dogData.birthDate}}</b></p>
+            <p style="color: #f39b2e;"><b>{{dogData.vaccine | date : 'dd/MM/yyyy'}}</b></p>
           </ion-col>
           <ion-col size="6" class="ion-text-center">
-            <p >ลักษณะนิสัย</p>
+            <p>ลักษณะนิสัย</p>
           </ion-col>
           <ion-col size="6" class="ion-text-center">
-            <p style="color: #f39b2e;"><b>{{dogData.detail}}</b></p>
+            <p style="color: #f39b2e;"><b>{{dogData.habit}}</b></p>
           </ion-col>
         </ion-row>
       </div>
     </ion-card>
+    <ion-button expand="block" (click)="onClickDeleteDog()" color="danger">
+      ลบข้อมูล
+    </ion-button>
   </div>
 </ion-content>

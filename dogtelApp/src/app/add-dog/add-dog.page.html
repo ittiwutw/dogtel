@@ -50,7 +50,10 @@
         <ion-datetime displayFormat="DD/MM/YYYY" placeholder="วันเกิด" [(ngModel)]="dogData.birthDate" ></ion-datetime>
       </ion-item>
       <ion-item>
-        <ion-label>พันธุ์</ion-label>
+        <ion-datetime displayFormat="DD/MM/YYYY" placeholder="วันที่ฉีดวัคซีน" [(ngModel)]="dogData.vaccine" ></ion-datetime>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">พันธุ์</ion-label>
         <ion-select placeholder="เลือก" [(ngModel)]="dogData.species">
           <ion-select-option *ngFor="let dog of dogMaster" [value]="dog">{{dog.dogSpecies}}</ion-select-option>
         </ion-select>
@@ -60,6 +63,9 @@
       </ion-item>
       <ion-item>
         <ion-textarea placeholder="จุดสังเกตุ" [(ngModel)]="dogData.detail"></ion-textarea>
+      </ion-item>
+      <ion-item>
+        <ion-textarea placeholder="ลักษณะนิสัย" [(ngModel)]="dogData.habit"></ion-textarea>
       </ion-item>
     </ion-list>
   </div>

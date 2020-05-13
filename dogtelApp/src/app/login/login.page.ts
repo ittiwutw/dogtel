@@ -50,6 +50,9 @@ export class LoginPage implements OnInit {
       if (userData) {
         console.log(userData.result[0]);
         // const userInfo = userData.result[0];
+        userData.result[0].id = userData.result[0].userId;
+        userData.result[1].id = userData.result[1].userId;
+        console.log(userData.result[0]);
 
         this.storage.set('user', userData.result).then((val) => {
           this.events.publish('user:login');

@@ -14,6 +14,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 
 import { Camera } from '@ionic-native/Camera/ngx';
+import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 
 @NgModule({
   declarations: [AppComponent],
@@ -30,6 +31,7 @@ import { Camera } from '@ionic-native/Camera/ngx';
     HttpClientModule,
     Geolocation,
     Camera,
+    InAppBrowser,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]

@@ -34,14 +34,33 @@
         <ion-input [(ngModel)]="roomData.roomName"></ion-input>
       </ion-item>
       <ion-item>
+        <ion-label>ขนาดสุนัขที่รองรับ</ion-label>
+        <ion-select placeholder="เลือก" [(ngModel)]="roomData.dogSize">
+          <ion-select-option value="1">เล็กมาก</ion-select-option>
+          <ion-select-option value="2">เล็ก</ion-select-option>
+          <ion-select-option value="3">กลาง</ion-select-option>
+          <ion-select-option value="4">ใหญ่</ion-select-option>
+          <ion-select-option value="5">ใหญ่มาก</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
         <ion-label>คำอธิบาย</ion-label>
         <ion-textarea rows="3" [(ngModel)]="roomData.detail"></ion-textarea>
       </ion-item>
       <ion-list-header>ขนาดห้อง (กว้าง x ยาว x สูง)</ion-list-header>
       <ion-item>
-        <ion-input placeholder="กว้าง" [(ngModel)]="roomData.sizeLength"></ion-input>
-        <ion-input placeholder="ยาว" [(ngModel)]="roomData.sizeWidth"></ion-input>
-        <ion-input placeholder="สูง" [(ngModel)]="roomData.sizeHeight"></ion-input>
+        <ion-input
+          placeholder="กว้าง"
+          [(ngModel)]="roomData.sizeLength"
+        ></ion-input>
+        <ion-input
+          placeholder="ยาว"
+          [(ngModel)]="roomData.sizeWidth"
+        ></ion-input>
+        <ion-input
+          placeholder="สูง"
+          [(ngModel)]="roomData.sizeHeight"
+        ></ion-input>
       </ion-item>
       <ion-item>
         <ion-label>ราคา</ion-label>

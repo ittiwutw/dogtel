@@ -1,41 +1,171 @@
+<!-- <ion-header>
+  <ion-toolbar >
+    <ion-title> </ion-title>
+  </ion-toolbar>
+</ion-header> -->
 <ion-content style="--ion-background-color: #ecd59f;">
   <ion-row>
     <ion-col size="10">
-      <ion-searchbar placeholder="Filter Schedules"></ion-searchbar>
+      <ion-searchbar placeholder="ค้นหา"></ion-searchbar>
     </ion-col>
     <ion-col size="2">
-      <ion-button style="margin-top: 10px;"
+      <ion-button style="margin-top: 10px;" routerLink="/message"
         ><ion-icon name="chatboxes"></ion-icon
       ></ion-button>
     </ion-col>
   </ion-row>
   <div class="ion-padding" style="background-color: #fff;">
-    <ion-button expand="block" (click)="onClickSearch()"><u>จองตอนนี้</u></ion-button>
+    <ion-button expand="block" (click)="onClickSearch()"
+      ><u>จองตอนนี้</u></ion-button
+    >
   </div>
+  <div padding style="background-color: #fff;">
+    <p><b>บทความ</b></p>
+    <ion-slides pager="false" [options]="slideOpts">
+      <ion-slide padding>
+        <ion-card class="ion-text-center" style="margin: -10px;">
+          <img src="../../assets/pro1.png" alt="" />
+        </ion-card>
+      </ion-slide>
+      <ion-slide padding>
+        <ion-card class="ion-text-center" style="margin: -10px;">
+          <img src="../../assets/pro2.png" alt="" />
+        </ion-card>
+      </ion-slide>
+    </ion-slides>
+  </div>
+  <br />
   <div padding style="background-color: #fff;">
     <p><b>โปรโมชั่น</b></p>
     <ion-slides pager="false" [options]="slideOpts">
       <ion-slide padding>
-        <img src="/assets/shapes.svg" alt="" />
+        <ion-card
+          class="ion-text-center"
+          style="margin: -10px;"
+          (click)="openLink('https://www.bbc.com/thai/features-51754055')"
+        >
+          <img
+            src="../../assets/news/news1.png"
+            alt=""
+            style="height: 150px;"
+          />
+          <div class="ion-padding">
+            <p>
+              <b
+                >ไวรัสโคโรนา: คนรักสัตว์ควรทำอย่างไร
+                เมื่อเพื่อนตัวน้อยอาจติดเชื้อโรคโควิด-19</b
+              >
+            </p>
+          </div>
+        </ion-card>
       </ion-slide>
 
       <ion-slide padding>
-        <img src="/assets/shapes.svg" alt="" />
+        <ion-card
+          class="ion-text-center"
+          style="margin: -10px;"
+          (click)="openLink('https://www.dailynews.co.th/foreign/757110')"
+        >
+          <img
+            src="../../assets/news/news2.png"
+            alt=""
+            style="height: 150px;"
+          />
+          <div class="ion-padding">
+            <p><b>พูเดิลยักษ์สีดำคว้าแชมป์ ยอดสุนัข'เคนเนลคลับ'</b></p>
+          </div>
+        </ion-card>
+      </ion-slide>
+
+      <ion-slide padding>
+        <ion-card
+          class="ion-text-center"
+          style="margin: -10px;"
+          (click)="openLink('https://www.sanook.com/news/7981970/')"
+        >
+          <img
+            src="../../assets/news/news3.png"
+            alt=""
+            style="height: 150px;"
+          />
+          <div class="ion-padding">
+            <p>
+              <b
+                >จีนสุดเจ๋ง ฝึก "หมาจรจัด" ทำงานให้ศุลกากร
+                พร้อมบรรจุตำแหน่งงานทันที</b
+              >
+            </p>
+          </div>
+        </ion-card>
+      </ion-slide>
+
+      <ion-slide padding>
+        <ion-card
+          class="ion-text-center"
+          style="margin: -10px;"
+          (click)="openLink('https://www.sanook.com/news/950051/')"
+        >
+          <img
+            src="../../assets/news/news4.png"
+            alt=""
+            style="height: 150px;"
+          />
+          <div class="ion-padding">
+            <p><b>อบอุ่น! สุนัขให้นมลูกเสือ</b></p>
+          </div>
+        </ion-card>
+      </ion-slide>
+
+      <ion-slide padding>
+        <ion-card
+          class="ion-text-center"
+          style="margin: -10px;"
+          (click)="openLink('https://www.sanook.com/news/7918898/')"
+        >
+          <img
+            src="../../assets/news/news5.png"
+            alt=""
+            style="height: 150px;"
+          />
+          <div class="ion-padding">
+            <p>
+              <b
+                >เจ้ากุชชี่ สุนัขฮีโร่ ช่วยเจ้าของรอดตาย
+                เหตุไฟไหม้บ้านตอนกลางดึก ขณะนอนหลับ</b
+              >
+            </p>
+          </div>
+        </ion-card>
       </ion-slide>
     </ion-slides>
   </div>
-  <br>
+  <br />
   <div padding style="background-color: #fff;">
     <p><b>สถานที่แนะนำ</b></p>
-    <ion-grid>
+    <div padding style="background-color: #fff;">
+      <ion-slides pager="false" [options]="slideOpts" >
+          <ion-slide padding *ngFor="let hotel of hotels; let i = index" >
+            <ion-card
+              class="ion-text-center"
+              style="margin: -10px;"
+              (click)="onClickHotel(hotel)"
+            >
+              <!-- <ion-card class="ion-text-center" (click)="onClickHotel(hotel)" *ngIf="i < 6"> -->
+              <img [src]="hotel.imgUrl" alt="" />
+              <p><b>{{hotel.name}}</b></p>
+            </ion-card>
+          </ion-slide>
+      </ion-slides>
+    </div>
+    <!-- <ion-grid>
       <ion-row>
-        <ion-col size="6" *ngFor="let hotel of hotels">
-          <ion-card class="ion-text-center" (click)="onClickHotel(hotel)">
-            <img [src]="hotel.imgUrl" alt="" style="height: 150px;"/>
+        <ion-col size="6" *ngFor="let hotel of hotels; let i = index" >
+          <ion-card class="ion-text-center" (click)="onClickHotel(hotel)" *ngIf="i < 6">
+            <img [src]="hotel.imgUrl" alt="" style="height: 150px;" />
             <p><b>{{hotel.name}}</b></p>
           </ion-card>
         </ion-col>
       </ion-row>
-    </ion-grid>
+    </ion-grid> -->
   </div>
 </ion-content>

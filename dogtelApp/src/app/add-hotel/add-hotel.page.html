@@ -2,7 +2,7 @@
   <ion-buttons>
     <ion-back-button defaultHref="/tabs/account"></ion-back-button>
     <ion-toolbar>
-      <ion-title>addHotel</ion-title>
+      <ion-title></ion-title>
     </ion-toolbar>
   </ion-buttons>
 </ion-header>
@@ -64,7 +64,7 @@
       </ion-item>
       <ion-item>
         <ion-label position="floating">รหัสไปรษณีย์</ion-label>
-        <ion-input type="text" [(ngModel)]="hotel.postalCode"></ion-input>
+        <ion-input type="number" [(ngModel)]="hotel.postalCode"></ion-input>
       </ion-item>
     </ion-list>
   </div>
@@ -210,19 +210,27 @@
     <ion-list-header>สถานที่ของท่านมีบริการอะไรบ้าง</ion-list-header>
     <ion-item>
       <ion-label>สระว่ายน้ำ</ion-label>
-      <ion-checkbox slot="end"></ion-checkbox>
+      <ion-checkbox slot="end" [(ngModel)]="type1"></ion-checkbox>
     </ion-item>
     <ion-item>
       <ion-label>สนามวิ่งเล่น</ion-label>
-      <ion-checkbox slot="end"></ion-checkbox>
+      <ion-checkbox slot="end" [(ngModel)]="type2"></ion-checkbox>
     </ion-item>
     <ion-item>
       <ion-label>อาบน้ำ</ion-label>
-      <ion-checkbox slot="end"></ion-checkbox>
+      <ion-checkbox slot="end" [(ngModel)]="type3"></ion-checkbox>
     </ion-item>
     <ion-item>
       <ion-label>ตัดขน</ion-label>
-      <ion-checkbox slot="end"></ion-checkbox>
+      <ion-checkbox slot="end" [(ngModel)]="type4"></ion-checkbox>
+    </ion-item>
+    <ion-item>
+      <ion-label>อื่นๆ</ion-label>
+      <ion-checkbox slot="end" [(ngModel)]="other"></ion-checkbox>
+    </ion-item>
+    <ion-item *ngIf="other">
+      <ion-label>กรอกข้อมูล &nbsp;</ion-label>
+      <ion-input  [(ngModel)]="otherDesc"></ion-input>
     </ion-item>
   </ion-list>
   <ion-list class="ion-padding" *ngIf="currentStep == 6">
@@ -297,7 +305,23 @@
       Dogtel</strong
     >
     <br />
-    <p>XXXX</p>
+    <p>
+      ข้อ 1 ขอบเขตการปฏิบัติ<br>
+      <br>
+      1.	สัญญาการรับฝากและสัญญาที่เกี่ยวข้องซึ่งโรงแรมจัดทำขึ้นให้เป็นไปตามที่กำหนดไว้ในข้อตกลงนี้ ส่วนหัวข้อที่ไม่ได้กำหนดไว้ในข้อตกลงนี้ให้เป็นไปตามกฎหมายหรือธรรมเนียมปฏิบัติ<br>
+      2.	โรงแรมสามารถปฏิบัติตามข้อตกลงพิเศษในขอบเขตที่ไม่ขัดต่อวัตถุประสงค์ของข้อตกลงนี้ กฎหมาย และธรรมเนียมปฏิบัติโดยไม่ต้องคำนึงถึงรายละเอียดที่กำหนดไว้ในข้อก่อนหน้า<br>
+      3.	โรงแรมไม่ได้ให้บริการอื่นๆ นอกเหนือจากที่พัก<br><br>
+      ข้อ 2 การปฏิเสธการรับฝาก<br>
+      โรงแรมอาจปฏิเสธการรับรับฝากในกรณีต่อไปนี้<br>
+      ①	เมื่อการยื่นขอรับฝากไม่เป็นไปตามข้อตกลงนี้<br>
+      ②	กรณีที่ไม่มีห้องพักว่างเนื่องจากห้องพักเต็ม<br>
+      ③	เมื่อเห็นว่าเจ้าของสุนัขอาจกระทำการใดที่ขัดต่อระเบียบตามกฎหมายหรือความเป็นระเบียบเรียบร้อยหรือศีลธรรมอันดี<br>
+      ④	กรณีที่เห็นว่าเจ้าของสุนัขเป็นโรคติดต่อ<br>
+      ⑤	เมื่อมีการขอให้รับผิดชอบเป็นพิเศษในการรับฝาก<br>
+      ⑥	กรณีที่ไม่สามารถให้รับฝากได้เนื่องจากเหตุสุดวิสัยอื่นๆ เช่น ภัยธรรมชาติ, โรงแรมเกิดความเสียหาย<br>
+      ⑧	เมื่อมีการนำวัตถุอันตราย (เช่น เตา, น้ำมัน) และวัตถุที่เป็นอันตรายต่อสวัสดิภาพเข้ามาภายในโรงแรม<br>
+      ⑨	เมื่อเข้าข่ายตามกรณีที่ระบุไว้ในข้อ 5 ของคำสั่งในการบังคับใช้กฎหมายการประกอบธุรกิจที่พัก <br>
+      </p>
   </div>
   <div *ngIf="currentStep == 9" class="ion-padding" style="padding-left: 30px;">
     <strong>เรียบร้อย! ท่านได้ลงทะเบียนทุกอย่างอย่างในเบื้องต้นแล้ว</strong>
@@ -319,7 +343,7 @@
     <ion-col size="12" *ngIf="currentStep == 7">
       <ion-item>
         <ion-label>ฉันยืนยันว่าชื่อและสถานที่ถูกต้อง</ion-label>
-        <ion-checkbox slot="start"></ion-checkbox>
+        <ion-checkbox slot="start" [(ngModel)]="acceptCheckbox"></ion-checkbox>
       </ion-item>
       <br />
     </ion-col>
@@ -342,7 +366,7 @@
         *ngIf="currentStep != 7"
         >ดำเนินการต่อ</ion-button
       >
-      <ion-button expand="full" (click)="onClickSave()" *ngIf="currentStep == 7"
+      <ion-button expand="full" (click)="onClickSave()" *ngIf="currentStep == 7" [disabled]="!acceptCheckbox"
         >ยืนยันข้อมูล</ion-button
       >
     </ion-col>

@@ -41,16 +41,28 @@ export class AnswerPage implements OnInit {
   }
 
   onClickSave() {
-    this.storage.get('user').then((user) => {
-      this.answer.userId = this.msg.userId;
-      this.answer.hotelId = this.msg.hotelId;
-      this.answer.askingId = this.msg.askingId;
-      this.restApi.saveAnswer(this.answer).then(res => {
-        console.log(res);
-        alert('ส่งข้อความสำเร็จแล้ว');
-        this.router.navigateByUrl('/tabs/account');
+    if (this.validate()) {
+      this.storage.get('user').then((user) => {
+        this.answer.userId = this.msg.userId;
+        this.answer.hotelId = this.msg.hotelId;
+        this.answer.askingId = this.msg.askingId;
+        this.restApi.saveAnswer(this.answer).then(res => {
+          console.log(res);
+          alert('ส่งข้อความสำเร็จแล้ว');
+          this.router.navigateByUrl('/tabs/account');
+        });
       });
-    });
+    }
+  }
+
+  validate() {
+    let isValidate = false;
+    if (this.answer.title === '' || this.answer.detail === '') {
+      alert('กรุณากรอกข้อมูลให้ครบถ้วน');
+    } else {
+      isValidate = true;
+    }
+    return isValidate;
   }
 
 }

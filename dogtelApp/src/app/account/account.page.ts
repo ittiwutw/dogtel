@@ -97,18 +97,18 @@ export class AccountPage implements OnInit {
 
   async presentAlertRadio() {
     const alert = await this.alertController.create({
-      header: 'Radio',
+      header: 'บัญชีของฉัน',
       inputs: [
         {
           name: 'radio1',
           type: 'radio',
-          label: 'ผู้ใช้บริการ',
+          label: 'หน้าผู้ใช้ของฉัน',
           value: 1
         },
         {
           name: 'radio2',
           type: 'radio',
-          label: 'ผู้ให้บริการ',
+          label: 'โรงแรมของฉัน',
           value: 2
         }
       ],

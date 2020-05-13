@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { RestService } from '../services/rest.service';
 import { Router } from '@angular/router';
 import { Storage } from '@ionic/storage';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-search-hotel',
@@ -9,7 +10,7 @@ import { Storage } from '@ionic/storage';
   styleUrls: ['./search-hotel.page.scss'],
 })
 export class SearchHotelPage implements OnInit {
-
+  minDate = new Date().toISOString();
   searchCondition = {
     hotelId: 0,
     userId: 0,
@@ -42,9 +43,21 @@ export class SearchHotelPage implements OnInit {
   }
 
   onClickSearch() {
-    this.searchCondition.userId = this.userData.id;
-    console.log(this.searchCondition);
-    this.router.navigate(['tabs/tab1/search-result', { searchCondition: JSON.stringify(this.searchCondition) }]);
+    if (this.validate()) {
+      this.searchCondition.userId = this.userData.id;
+      console.log(this.searchCondition);
+      this.router.navigate(['tabs/tab1/search-result', { searchCondition: JSON.stringify(this.searchCondition) }]);
+    }
+  }
+
+  validate() {
+    let isValidate = false;
+    if (!this.searchCondition.dogData) {
+      alert('กรุณาเลือกสุนัขที่ต้องการ');
+    } else {
+      isValidate = true;
+    }
+    return isValidate;
   }
 
   loadDog() {
@@ -66,7 +79,7 @@ export class SearchHotelPage implements OnInit {
     console.log(this.searchCondition.dogData);
     const selectedDog = this.searchCondition.dogData;
     this.searchCondition.dogId = selectedDog.id;
-    this.searchCondition.dogSize = selectedDog.size;
+    this.searchCondition.dogSize = selectedDog.dogSize;
     console.log(this.searchCondition);
   }
 

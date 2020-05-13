@@ -56,6 +56,16 @@ export class HotelDetailPage implements OnInit {
         console.log(this.bookingDetail);
       }
       console.log(this.hotel);
+
+      this.storage.get('favs').then(favs => {
+        console.log(favs);
+        favs.forEach(fav => {
+          if (fav.id === this.hotel.id) {
+            this.isAddedFav = true;
+          }
+        });
+      });
+
       this.loadMap();
       this.loadDog();
       this.getRooms();
@@ -136,48 +146,63 @@ export class HotelDetailPage implements OnInit {
   }
 
   onClickBook(roomId) {
-    console.log(this.bookingDetail.startDate);
-    const startDate = moment(this.bookingDetail.startDate, 'YYYY-MM-DD').toDate();
-    console.log(startDate.getFullYear() + '-' + startDate.getMonth() + '-' + startDate.getDate());
-    const startDateStr = startDate.getFullYear() + '-' + startDate.getMonth() + '-' + startDate.getDate();
-    this.bookingDetail.startDate = startDateStr;
+    if (this.validate()) {
+      console.log(this.bookingDetail.startDate);
+      const startDate = moment(this.bookingDetail.startDate, 'YYYY-MM-DD').toDate();
+      console.log(startDate.getFullYear() + '-' + startDate.getMonth() + '-' + startDate.getDate());
+      const startDateStr = startDate.getFullYear() + '-' + startDate.getMonth() + '-' + startDate.getDate();
+      this.bookingDetail.startDate = startDateStr;
 
-    const endDate = moment(this.bookingDetail.endDate, 'YYYY-MM-DD').toDate();
-    console.log(endDate.getFullYear() + '-' + endDate.getMonth() + '-' + endDate.getDate());
-    const endDateStr = endDate.getFullYear() + '-' + endDate.getMonth() + '-' + endDate.getDate();
-    this.bookingDetail.endDate = endDateStr;
+      const endDate = moment(this.bookingDetail.endDate, 'YYYY-MM-DD').toDate();
+      console.log(endDate.getFullYear() + '-' + endDate.getMonth() + '-' + endDate.getDate());
+      const endDateStr = endDate.getFullYear() + '-' + endDate.getMonth() + '-' + endDate.getDate();
+      this.bookingDetail.endDate = endDateStr;
 
-    const selectStartTime = new Date(this.bookingDetail.startTime);
-    console.log(selectStartTime.getHours());
-    console.log(selectStartTime.getMinutes());
-    this.bookingDetail.startTime = selectStartTime.getHours() + ':' + selectStartTime.getMinutes();
+      const selectStartTime = new Date(this.bookingDetail.startTime);
+      console.log(selectStartTime.getHours());
+      console.log(selectStartTime.getMinutes());
+      this.bookingDetail.startTime = selectStartTime.getHours() + ':' + selectStartTime.getMinutes();
 
-    const selectEndTime = new Date(this.bookingDetail.endTime);
-    console.log(selectEndTime.getHours());
-    console.log(selectEndTime.getMinutes());
-    this.bookingDetail.endTime = selectEndTime.getHours() + ':' + selectEndTime.getMinutes();
+      const selectEndTime = new Date(this.bookingDetail.endTime);
+      console.log(selectEndTime.getHours());
+      console.log(selectEndTime.getMinutes());
+      this.bookingDetail.endTime = selectEndTime.getHours() + ':' + selectEndTime.getMinutes();
 
-    console.log(this.bookingDetail);
+      console.log(this.bookingDetail);
 
-    this.bookingDetail.hotelId = this.hotel.id;
-    this.bookingDetail.roomId = roomId;
+      this.bookingDetail.hotelId = this.hotel.id;
+      this.bookingDetail.roomId = roomId;
 
-    this.storage.get('user').then((val) => {
-      console.log(val);
-      if (val) {
-        this.bookingDetail.userId = val[0].userId;
+      this.storage.get('user').then((val) => {
+        console.log(val);
+        if (val) {
+          this.bookingDetail.userId = val[0].userId;
 
-        this.restApi.bookHotel(this.bookingDetail).then(res => {
-          console.log(res);
-          let data: any;
-          data = res;
-          alert('ทำการจองสำเร็จแล้ว');
-          this.router.navigate(['tabs/tab2']);
-        });
-      }
-    });
+          this.restApi.bookHotel(this.bookingDetail).then(res => {
+            console.log(res);
+            let data: any;
+            data = res;
+            alert('ทำการจองสำเร็จแล้ว');
+            this.router.navigate(['tabs/tab2']);
+          });
+        }
+      });
+    }
 
+  }
 
+  validate() {
+    let isValidate = false;
+    if (this.bookingDetail.startDate === ''
+      || this.bookingDetail.endDate === ''
+      || this.bookingDetail.startTime === ''
+      || this.bookingDetail.endTime === ''
+    ) {
+      alert('กรุณาใส่เวลาให้ครบถ้วน');
+    } else {
+      isValidate = true;
+    }
+    return isValidate;
   }
 
   onClickFav() {
