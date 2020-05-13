@@ -7,7 +7,7 @@
       <div>
         <ion-row>
           <ion-col size="12" class="ion-text-right">
-            <img src="../../assets/icon/H_pro_mes_0.png" alt="" style="height: 40px;" routerLink="/message"/>
+            <img src="../../assets/icon/H_pro_mes_0.png" alt="" style="height: 40px;" routerLink="/message" />
           </ion-col>
         </ion-row>
       </div>
@@ -29,10 +29,10 @@
             <p>Username : {{profile.username}}</p>
           </ion-col>
           <ion-col size="4">
-            <ion-button *ngIf="userRole == 1" (click)="presentAlertRadio()"
+            <ion-button *ngIf="userRole == 1" (click)="presentAlertRadio()" color="tertiary"
             >บัญชีของฉัน</ion-button
           >
-          <ion-button *ngIf="userRole == 2" (click)="presentAlertRadio()"
+          <ion-button *ngIf="userRole == 2" (click)="presentAlertRadio()" color="tertiary"
             >บัญชีของฉัน</ion-button
           >
           </ion-col>
