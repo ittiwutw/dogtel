@@ -20,8 +20,8 @@
     >
   </div>
   <div padding style="background-color: #fff;">
-    <p><b>บทความ</b></p>
-    <ion-slides pager="false" [options]="slideOpts">
+    <p><b>โปรโมชั่น</b></p>
+    <ion-slides pager="false" [options]="slideProOpts">
       <ion-slide padding>
         <ion-card class="ion-text-center" style="margin: -10px;">
           <img src="../../assets/pro1.png" alt="" />
@@ -36,7 +36,36 @@
   </div>
   <br />
   <div padding style="background-color: #fff;">
-    <p><b>โปรโมชั่น</b></p>
+    <p><b>สถานที่แนะนำ</b></p>
+    <div padding style="background-color: #fff;">
+      <ion-slides pager="false" [options]="slideOpts" >
+          <ion-slide padding *ngFor="let hotel of hotels; let i = index" >
+            <ion-card
+              class="ion-text-center"
+              style="margin: -10px;"
+              (click)="onClickHotel(hotel)"
+            >
+              <!-- <ion-card class="ion-text-center" (click)="onClickHotel(hotel)" *ngIf="i < 6"> -->
+              <img [src]="hotel.imgUrl" alt="" style="width: fit-content;"/>
+              <p><b>{{hotel.name}}</b></p>
+            </ion-card>
+          </ion-slide>
+      </ion-slides>
+    </div>
+    <!-- <ion-grid>
+      <ion-row>
+        <ion-col size="6" *ngFor="let hotel of hotels; let i = index" >
+          <ion-card class="ion-text-center" (click)="onClickHotel(hotel)" *ngIf="i < 6">
+            <img [src]="hotel.imgUrl" alt="" style="height: 150px;" />
+            <p><b>{{hotel.name}}</b></p>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-grid> -->
+  </div>
+  <br />
+  <div padding style="background-color: #fff;">
+    <p><b>บทความ</b></p>
     <ion-slides pager="false" [options]="slideOpts">
       <ion-slide padding>
         <ion-card
@@ -47,7 +76,7 @@
           <img
             src="../../assets/news/news1.png"
             alt=""
-            style="height: 150px;"
+            style="width: fit-content;"
           />
           <div class="ion-padding">
             <p>
@@ -69,7 +98,7 @@
           <img
             src="../../assets/news/news2.png"
             alt=""
-            style="height: 150px;"
+            style="width: fit-content;"
           />
           <div class="ion-padding">
             <p><b>พูเดิลยักษ์สีดำคว้าแชมป์ ยอดสุนัข'เคนเนลคลับ'</b></p>
@@ -86,7 +115,7 @@
           <img
             src="../../assets/news/news3.png"
             alt=""
-            style="height: 150px;"
+            style="width: fit-content;"
           />
           <div class="ion-padding">
             <p>
@@ -108,7 +137,7 @@
           <img
             src="../../assets/news/news4.png"
             alt=""
-            style="height: 150px;"
+            style="width: fit-content;"
           />
           <div class="ion-padding">
             <p><b>อบอุ่น! สุนัขให้นมลูกเสือ</b></p>
@@ -125,7 +154,7 @@
           <img
             src="../../assets/news/news5.png"
             alt=""
-            style="height: 150px;"
+            style="width: fit-content;"
           />
           <div class="ion-padding">
             <p>
@@ -138,34 +167,5 @@
         </ion-card>
       </ion-slide>
     </ion-slides>
-  </div>
-  <br />
-  <div padding style="background-color: #fff;">
-    <p><b>สถานที่แนะนำ</b></p>
-    <div padding style="background-color: #fff;">
-      <ion-slides pager="false" [options]="slideOpts" >
-          <ion-slide padding *ngFor="let hotel of hotels; let i = index" >
-            <ion-card
-              class="ion-text-center"
-              style="margin: -10px;"
-              (click)="onClickHotel(hotel)"
-            >
-              <!-- <ion-card class="ion-text-center" (click)="onClickHotel(hotel)" *ngIf="i < 6"> -->
-              <img [src]="hotel.imgUrl" alt="" />
-              <p><b>{{hotel.name}}</b></p>
-            </ion-card>
-          </ion-slide>
-      </ion-slides>
-    </div>
-    <!-- <ion-grid>
-      <ion-row>
-        <ion-col size="6" *ngFor="let hotel of hotels; let i = index" >
-          <ion-card class="ion-text-center" (click)="onClickHotel(hotel)" *ngIf="i < 6">
-            <img [src]="hotel.imgUrl" alt="" style="height: 150px;" />
-            <p><b>{{hotel.name}}</b></p>
-          </ion-card>
-        </ion-col>
-      </ion-row>
-    </ion-grid> -->
   </div>
 </ion-content>

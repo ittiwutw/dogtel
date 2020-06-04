@@ -103,7 +103,7 @@
         <ion-col size="12" *ngIf="booking.status != 'รอการยืนยัน'">
           <ion-button
             expand="block"
-            color="success"
+            color="tertiary"
             (click)="payBooking(booking)"
             [disabled]="booking.paymentStatus == 'ชำระเงินแล้ว'"
             >ชำระเงิน</ion-button
@@ -118,7 +118,7 @@
           >
         </ion-col>
         <ion-col size="12">
-          <ion-button expand="block" (click)="onClickAsking(booking)"
+          <ion-button expand="block" (click)="onClickAsking(booking)" color="tertiary"
             >ติดต่อผู้ให้บริการ</ion-button
           >
         </ion-col>
@@ -176,7 +176,7 @@
           </ion-row>
         </ion-col>
         <ion-col size="12">
-          <ion-button expand="block" (click)="onClickReview(booking)"
+          <ion-button expand="block" (click)="onClickReview(booking)" color="tertiary"
             >รีวิว</ion-button
           >
         </ion-col>
@@ -234,7 +234,7 @@
           </ion-row>
         </ion-col>
         <ion-col size="12">
-          <ion-button expand="block" (click)="onClickAsking(booking)"
+          <ion-button expand="block" (click)="onClickAsking(booking)" color="tertiary"
             >ติดต่อผู้ให้บริการ</ion-button
           >
         </ion-col>
@@ -302,13 +302,13 @@
         <ion-col size="6">
           <ion-button
             expand="block"
-            color="success"
+            color="tertiary"
             (click)="hotelConfirm(booking)"
             >ยอมรับ</ion-button
           >
         </ion-col>
         <ion-col size="12">
-          <ion-button expand="block" (click)="onClickAsking(booking)"
+          <ion-button expand="block" (click)="onClickAsking(booking)" color="tertiary"
             >ติดต่อผู้จอง</ion-button
           >
         </ion-col>
@@ -386,13 +386,13 @@
         <ion-col size="6">
           <ion-button
             expand="block"
-            color="success"
+            color="tertiary"
             (click)="hotelFinish(booking)"
             >ลูกค้ารับกลับแล้ว</ion-button
           >
         </ion-col>
         <ion-col size="12">
-          <ion-button expand="block">ติดต่อผู้จอง</ion-button>
+          <ion-button expand="block" (click)="onClickAsking(booking)" color="tertiary">ติดต่อผู้จอง</ion-button>
         </ion-col>
       </ion-row>
     </ion-card>

@@ -55,8 +55,11 @@ export class LoginPage implements OnInit {
         console.log(userData.result[0]);
 
         this.storage.set('user', userData.result).then((val) => {
-          this.events.publish('user:login');
-          this.router.navigate(['/tabs']);
+          this.storage.remove('role').then(removed => {
+            this.storage.set('role', 1);
+            this.events.publish('user:login');
+            this.router.navigate(['/tabs']);
+          });
         });
 
       } else {

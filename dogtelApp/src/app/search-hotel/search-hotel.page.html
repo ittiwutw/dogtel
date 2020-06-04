@@ -21,11 +21,13 @@
             display-timezone="utc"
             style="background-color: #ffff;"
             [min]="minDate"
+            placeholder="เลือก"
           ></ion-datetime>
           <p>เวลานำฝาก</p>
           <ion-datetime
             [(ngModel)]="searchCondition.startTime"
             displayFormat="HH:mm"
+            placeholder="เลือก"
           ></ion-datetime>
         </ion-col>
         <ion-col size="2" class="ion-text-center">
@@ -45,12 +47,14 @@
             value="2019-10-01T15:43:40.394Z"
             display-timezone="utc"
             [min]="searchCondition.startDate"
+            placeholder="เลือก"
           ></ion-datetime>
           <p>เวลารับกลับ</p>
 
           <ion-datetime
             [(ngModel)]="searchCondition.endTime"
             displayFormat="HH:mm"
+            placeholder="เลือก"
           ></ion-datetime>
         </ion-col>
       </ion-row>

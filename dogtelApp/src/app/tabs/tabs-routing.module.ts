@@ -103,6 +103,16 @@ const routes: Routes = [
         ]
       },
       {
+        path: 'searchHotel',
+        children: [
+          {
+            path: '',
+            loadChildren: () =>
+              import('../search-hotel/search-hotel.module').then(m => m.SearchHotelPageModule)
+          }
+        ]
+      },
+      {
         path: '',
         redirectTo: '/tabs/tab1',
         pathMatch: 'full'

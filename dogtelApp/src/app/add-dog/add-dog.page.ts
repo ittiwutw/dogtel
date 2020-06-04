@@ -28,6 +28,8 @@ export class AddDogPage implements OnInit {
   base64Img: any;
   dogMaster = [];
 
+  isDisabled = false;
+
   constructor(
     private router: Router,
     private restApi: RestService,
@@ -52,6 +54,7 @@ export class AddDogPage implements OnInit {
 
   onClickSave() {
     if (this.validate()) {
+      this.isDisabled = true;
       let selectedDog: any;
       selectedDog = this.dogData.species;
 

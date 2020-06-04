@@ -71,7 +71,7 @@
   </div>
 </ion-content>
 <ion-footer>
-  <ion-button expand="full" (click)="onClickSave()">
+  <ion-button expand="full" (click)="onClickSave()" color="tertiary" [disabled]="isDisabled">
     บันทึกข้อมูล
   </ion-button>
 </ion-footer>
